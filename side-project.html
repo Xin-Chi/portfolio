@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Side Project - RAG System</title>
+  <style>
+    :root {
+      --bg: #efe3cf;
+      --card: rgba(250, 241, 226, 0.95);
+      --text: #2f2218;
+      --muted: #6f5844;
+      --border: rgba(80, 56, 35, 0.28);
+      --accent: #8a5a2f;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', 'Noto Serif TC', 'PMingLiU', serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 14px auto;
+      padding: 20px 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 10px 24px rgba(66, 45, 28, 0.16);
+      padding: 20px;
+    }
+
+    h1 {
+      margin: 0 0 12px 0;
+      font-size: 1.35rem;
+      border-bottom: 1px solid rgba(111, 88, 68, 0.28);
+      padding-bottom: 8px;
+    }
+
+    p, li {
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(138, 90, 47, 0.45);
+    }
+
+    .hl {
+      background: rgba(138, 90, 47, 0.13);
+      border-bottom: 1px dotted rgba(138, 90, 47, 0.65);
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+
+    .time-right {
+      text-align: right;
+      color: var(--muted);
+      font-weight: 850;
+      margin: 8px 0 14px 0;
+      line-height: 1.5;
+    }
+
+    .menu-wrap {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 20;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .menu-btn {
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(250, 241, 226, 0.95);
+      box-shadow: 0 8px 20px rgba(66, 45, 28, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #4b3423;
+      margin: 2px 0;
+      border-radius: 2px;
+    }
+
+    .menu-list {
+      margin-left: 10px;
+      min-width: 190px;
+      background: rgba(250, 241, 226, 0.97);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 12px 24px rgba(66, 45, 28, 0.16);
+      padding: 10px 12px;
+      text-align: left;
+      opacity: 0;
+      transform: translateX(-8px);
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .menu-wrap:hover .menu-list,
+    .menu-wrap:focus-within .menu-list {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .menu-title {
+      font-weight: 900;
+      color: #4a3321;
+      margin-bottom: 7px;
+      border-bottom: 1px solid rgba(111, 88, 68, 0.28);
+      padding-bottom: 6px;
+    }
+
+    .menu-link {
+      display: block;
+      color: #3d2a1b;
+      text-decoration: none;
+      border-bottom: none;
+      padding: 6px 2px;
+      font-weight: 700;
+    }
+
+    .menu-link:hover {
+      text-decoration: underline;
+    }
+
+    .home-btn {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 20;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(250, 241, 226, 0.95);
+      box-shadow: 0 8px 20px rgba(66, 45, 28, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .home-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .home-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #4b3423;
+      display: block;
+    }
+
+    .section-label {
+      font-weight: 900;
+      border-bottom: 1px dashed rgba(111, 88, 68, 0.35);
+      padding-bottom: 6px;
+      margin: 18px 0 10px 0;
+    }
+
+    .arch-block {
+      background: rgba(138, 90, 47, 0.06);
+      border: 1px solid rgba(138, 90, 47, 0.18);
+      border-radius: 8px;
+      padding: 14px 20px;
+      margin: 10px 0;
+      font-size: 0.97em;
+      line-height: 2;
+      text-align: center;
+      color: var(--text);
+    }
+
+    .arch-block .step {
+      display: inline-block;
+      background: rgba(138, 90, 47, 0.12);
+      border: 1px solid rgba(138, 90, 47, 0.28);
+      border-radius: 6px;
+      padding: 2px 12px;
+      margin: 2px 0;
+    }
+
+    .arch-block .arrow {
+      display: block;
+      color: var(--muted);
+      font-size: 1.1em;
+      line-height: 1.4;
+    }
+
+    .demo-block {
+      background: rgba(138, 90, 47, 0.06);
+      border: 1px solid rgba(138, 90, 47, 0.18);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      font-size: 0.96em;
+      line-height: 1.8;
+    }
+
+    .demo-label {
+      font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .demo-quote {
+      font-style: italic;
+      color: var(--text);
+      margin: 0 0 10px 8px;
+    }
+
+    .demo-list {
+      margin: 0 0 10px 8px;
+      padding-left: 18px;
+    }
+
+    .img-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .img-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    .project-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+      border: 1px solid rgba(80, 56, 35, 0.20);
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .img-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      border: 1px dashed rgba(138, 90, 47, 0.45);
+      background: rgba(138, 90, 47, 0.05);
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+
+    .img-caption {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.95em;
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    .img-item {
+      text-align: left;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    .tag {
+      background: rgba(138, 90, 47, 0.11);
+      border: 1px solid rgba(138, 90, 47, 0.28);
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-size: 0.92em;
+      color: var(--text);
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        padding: 16px 12px;
+      }
+      .img-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-wrap" aria-label="Project Navigation">
+    <div class="menu-btn" aria-hidden="true">
+      <div>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <nav class="menu-list">
+      <div class="menu-title">專案分頁</div>
+      <a class="menu-link" href="thesis.html">1. 碩論</a>
+      <a class="menu-link" href="capstone.html">2. 專題</a>
+      <a class="menu-link" href="side-project.html">3. Side Project</a>
+    </nav>
+  </div>
+
+  <a class="home-btn" href="index.html" aria-label="返回主頁" title="返回主頁">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3l9 8h-3v10h-4V14H10v7H6V11H3l9-8z"></path>
+    </svg>
+  </a>
+
+  <div class="container">
+    <div class="card">
+      <h1>LangChain-Based <span class="hl">RAG</span> System for Emergency Department Medical Records</h1>
+
+      <div class="time-right">Side Project</div>
+
+      <div class="section-label">Project Overview</div>
+      <ul>
+        <li>建構針對急診病歷的 <span class="hl">Retrieval-Augmented Generation (RAG)</span> 查詢系統</li>
+        <li>處理 <span class="hl">50,000+</span> 筆非結構化臨床病歷，轉換為語義向量嵌入</li>
+        <li>結合 <span class="hl">FAISS</span> 向量資料庫與 <span class="hl">LLM(gpt-4o)</span>，使模型回覆有依據地根植於檢索的病歷內容</li>
+      </ul>
+
+      <div class="img-grid" aria-label="Overview Figure">
+        <div class="img-item full">
+          <img class="project-img" src="sideproject/LLMworkflow.png" alt="LLM RAG Workflow">
+          <div class="img-caption">LLMworkflow：整體 RAG 系統流程，從病歷輸入至 LLM 生成回覆</div>
+        </div>
+      </div>
+
+      <div class="section-label">System Architecture</div>
+      <div class="arch-block" aria-label="System Architecture Diagram">
+        <span class="step">Medical Records</span>
+        <span class="arrow">↓</span>
+        <span class="step">Text Preprocessing</span>
+        <span class="arrow">↓</span>
+        <span class="step">Chunking</span>
+        <span class="arrow">↓</span>
+        <span class="step">MiniLM Embedding</span>
+        <span class="arrow">↓</span>
+        <span class="step">FAISS Vector DB</span>
+        <span class="arrow">↓</span>
+        <span class="step">Retriever</span>
+        <span class="arrow">↓</span>
+        <span class="step">Prompt Template</span>
+        <span class="arrow">↓</span>
+        <span class="step">LLM</span>
+        <span class="arrow">↓</span>
+        <span class="step">Answer</span>
+      </div>
+
+      <div class="section-label">Technical Stack</div>
+      <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">LangChain</span>
+        <span class="tag">MiniLM Embedding Model</span>
+        <span class="tag">FAISS Vector Database</span>
+        <span class="tag">Prompt Engineering</span>
+        <span class="tag">Colab</span>
+        <span class="tag">OpenAI API</span>
+      </div>
+
+      <div class="section-label">Demo</div>
+      <div class="demo-block">
+        <div class="demo-label">User Query</div>
+        <div class="demo-quote">"病人是否有意識不清的情況?"</div>
+        <!--
+        <div class="demo-label">Retrieved Records</div>
+        <ul class="demo-list">
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        -->
+        <div class="demo-label">LLM Response</div>
+        <div class="demo-quote">
+          💡 檢索端信心度: 82.68%<br>
+          --------------------------------------------------<br>
+          根據提供的紀錄，病人有意識不清的情況。以下是相關的來源：<br><br>
+
+          1. 在 [Source: 6892] 中，病人被描述為「意識程度改變,無意識(GCS 3 ~ 8)」，這表明病人有嚴重的意識不清。
+          <br>2. 在 [Source: 48560] 中，病人被描述為「反應緩慢」和「drowsiness (+)」，這也顯示出意識不清的情況。
+          <br>3. 在 [Source: 21123] 中，病人被描述為「意識程度改變(GCS 9 ~ 13)」和「conscious drowsy」，這同樣顯示出意識不清的情況。
+          <br>4. 在 [Source: 8831] 中，病人被描述為「意識程度改變(GCS 9 ~ 13)」和「conscious partial recover in ED」，這也顯示出意識不清的情況。
+          <br>綜合信心分數：100%。
+
+        </div>
+
+        <div style="margin-top:8px; color: var(--muted); font-size: 0.92em;">＊ 以上為實際結果範例</div>
+      </div>
+
+      <div class="section-label">圖示（Figures）</div>
+      <div class="img-grid" aria-label="Side Project Figures">
+        <div class="img-item full">
+          <img class="project-img" src="sideproject/demo1.png" alt="LLM RAG Workflow">
+          <div class="img-caption">Demo 成果截圖( 成功檢索並摘要 )</div>
+        </div>
+        <div class="img-item full">
+          <img class="project-img" src="sideproject/demo2.png" alt="LLM RAG Workflow">
+          <div class="img-caption">Demo 成果截圖( 模型抑制文章中未出現的幻覺資訊 )</div>
+        </div>
+
+      </div>
+
+      <p style="margin-top: 14px;"><a href="index.html">返回主頁</a></p>
+    </div>
+  </div>
+</body>
+</html>

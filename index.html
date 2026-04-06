@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的個人網站 - 主頁</title>
+  <style>
+    :root {
+      --bg: #efe3cf;
+      --card: rgba(250, 241, 226, 0.92);
+      --text: #2f2218;
+      --muted: #6f5844;
+      --accent: #8a5a2f;
+      --border: rgba(80, 56, 35, 0.28);
+    }
+
+    body {
+      font-family: Georgia, 'Times New Roman', 'Noto Serif TC', 'PMingLiU', serif;
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(1200px circle at 10% 0%, rgba(138, 90, 47, 0.14), transparent 52%),
+        radial-gradient(900px circle at 100% 15%, rgba(164, 116, 75, 0.14), transparent 50%),
+        repeating-linear-gradient(
+          0deg,
+          rgba(110, 82, 58, 0.028) 0px,
+          rgba(110, 82, 58, 0.028) 1px,
+          transparent 1px,
+          transparent 3px
+        ),
+        var(--bg);
+      padding: 0;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 20px auto;
+      padding: 26px 18px;
+      text-align: center;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 16px 42px rgba(64, 43, 28, 0.18);
+      padding: 26px 18px;
+      position: relative;
+    }
+
+    .menu-wrap {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 20;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .menu-btn {
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(250, 241, 226, 0.95);
+      box-shadow: 0 8px 20px rgba(66, 45, 28, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #4b3423;
+      margin: 2px 0;
+      border-radius: 2px;
+    }
+
+    .menu-list {
+      margin-left: 10px;
+      min-width: 190px;
+      background: rgba(250, 241, 226, 0.97);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 12px 24px rgba(66, 45, 28, 0.16);
+      padding: 10px 12px;
+      text-align: left;
+      opacity: 0;
+      transform: translateX(-8px);
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .menu-wrap:hover .menu-list,
+    .menu-wrap:focus-within .menu-list,
+    .menu-wrap.open .menu-list {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .menu-title {
+      font-weight: 900;
+      color: #4a3321;
+      margin-bottom: 7px;
+      border-bottom: 1px solid rgba(111, 88, 68, 0.28);
+      padding-bottom: 6px;
+    }
+
+    .menu-link {
+      display: block;
+      color: #3d2a1b;
+      text-decoration: none;
+      border-bottom: none;
+      padding: 6px 2px;
+      font-weight: 700;
+    }
+
+    .menu-link:hover {
+      text-decoration: underline;
+    }
+
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border: 1px dashed rgba(111, 88, 68, 0.28);
+      border-radius: 7px;
+      pointer-events: none;
+    }
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .profile-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 8px solid rgba(138, 90, 47, 0.22);
+      background: #f6ebd9;
+      box-shadow: 0 10px 22px rgba(87, 59, 38, 0.23);
+      filter: saturate(0.85) contrast(0.95);
+    }
+
+    .stack {
+      margin: 18px auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      max-width: 560px;
+    }
+
+    .card {
+      width: 100%;
+      background: rgba(255, 249, 238, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-sizing: border-box;
+      word-break: break-word;
+      box-shadow: 0 7px 20px rgba(66, 45, 28, 0.08);
+    }
+
+    .content {
+      font-size: 1.05em;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      border-bottom: 1px dotted rgba(138, 90, 47, 0.45);
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .edu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .edu-entry {
+      background: #f9f0e2;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 14px 14px;
+      box-sizing: border-box;
+    }
+
+    .edu-year {
+      color: var(--muted);
+      font-weight: 900;
+      letter-spacing: 0.01em;
+      font-size: 0.98em;
+    }
+
+    .edu-school {
+      font-weight: 950;
+      margin-top: 6px;
+    }
+
+    .edu-major {
+      color: #0b1220;
+      margin-top: 4px;
+      font-weight: 650;
+    }
+
+    .hint {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+
+    .section-title {
+      font-weight: 950;
+      letter-spacing: 0.01em;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(138, 90, 47, 0.3);
+      background: rgba(138, 90, 47, 0.09);
+      font-weight: 850;
+      font-size: 0.93em;
+      color: #332317;
+      user-select: none;
+    }
+
+    .chip .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 3.5px rgba(138, 90, 47, 0.16);
+      flex: 0 0 auto;
+    }
+
+    .card-title {
+      font-size: 1.14em;
+      font-weight: 950;
+      text-align: left;
+      margin-bottom: 10px;
+      color: #3f2a1b;
+      border-bottom: 1px solid rgba(111, 88, 68, 0.32);
+      padding-bottom: 7px;
+    }
+
+    .basic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: left;
+      line-height: 1.6;
+    }
+
+    .basic-item strong {
+      margin-right: 6px;
+    }
+
+    .bio-text {
+      text-align: left;
+      line-height: 1.75;
+      color: #2d2117;
+    }
+
+    .intern-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 2px;
+      text-align: left;
+    }
+
+    .intern-entry {
+      background: #f9f0e2;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 14px 14px;
+      box-sizing: border-box;
+    }
+
+    .intern-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-weight: 900;
+    }
+
+    .intern-time {
+      color: var(--muted);
+      font-weight: 850;
+    }
+
+    .intern-points {
+      margin: 8px 0 0 18px;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    .intern-points li {
+      margin-bottom: 6px;
+    }
+
+    .skill-group {
+      margin-bottom: 12px;
+    }
+
+    .skill-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .skill-label {
+      text-align: left;
+      color: var(--muted);
+      font-weight: 850;
+      margin-bottom: 10px;
+      font-size: 0.98em;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed rgba(111, 88, 68, 0.35);
+    }
+
+    .project-links {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        margin: 14px 14px;
+      }
+
+      .panel {
+        padding: 22px 14px;
+      }
+
+      .profile-img {
+        width: 140px;
+        height: 140px;
+      }
+
+      .card {
+        padding: 12px 14px;
+      }
+
+      .menu-wrap {
+        top: 10px;
+        left: 10px;
+      }
+
+      .menu-list {
+        min-width: 170px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-wrap" aria-label="Project Navigation">
+    <div class="menu-btn" aria-hidden="true">
+      <div>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <nav class="menu-list">
+      <div class="menu-title">專案分頁</div>
+      <a class="menu-link" href="thesis.html">1. 碩論</a>
+      <a class="menu-link" href="capstone.html">2. 專題</a>
+      <a class="menu-link" href="side-project.html">3. side project</a>
+    </nav>
+  </div>
+
+
+  <div class="container">
+    <div class="panel">
+      <div class="top">
+        <!-- 將 `webphoto.jpg` 換成你的照片檔名即可 -->
+        <img class="profile-img" alt="個人照片" src="webphoto.jpg">
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <div class="card-title">基本資料</div>
+          <div class="basic-list">
+            <div style="margin-top: 6px; font-size: 0.9em; font-weight: 900; color: #c0392b; letter-spacing: 0.04em;">🔍 尋求正職機會</div>
+            <div class="basic-item"><strong>鍾昕起 (Hsin - chi Chung)</strong>
+              <div class="basic-item"><strong>役畢，積極求職中</strong>
+              
+            <div class="basic-item"><strong>Email:</strong> <a href="mailto:your-email@example.com">lexlex4545@gmail.com</a></div>
+            <div class="basic-item"><strong>電話:</strong> 0909-910-327</div>
+            <div class="basic-item"><strong>居住地:</strong> 台北市, 文山區</div>
+            <div class="basic-item"><strong>學歷:</strong></div>
+          </div>
+          <div class="edu-list" style="margin-top: 10px;">
+            <div class="edu-entry">
+              <div class="edu-year">2023/9 ~ 2025/8</div>
+              <div class="edu-school">國立中央大學（最高學歷）</div>
+              <div class="edu-major">生醫科學與工程學系 碩士畢業</div>
+            </div>
+
+            <div class="edu-entry">
+              <div class="edu-year">2019/9 ~ 2023/6</div>
+              <div class="edu-school">中山醫學大學</div>
+              <div class="edu-major">醫學資訊學系 大學畢業</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">2. 自傳</div>
+          <div class="bio-text">
+              研究所畢業於中央大學( National Central University, NCU)生醫科學與工程研究所，
+              研究方向聚焦於<b>自然語言處理與機器學習</b>在醫療資料中的應用。
+              <br>碩士研究以急診室臨床資料為基礎，處理包含生命徵象與大量中英混合自由文本的醫療紀錄，
+              透過<b>資料清理、特徵工程與 NLP 技術</b>將非結構化文本轉換為可分析的特徵，
+              並建立機器學習模型進行臨床結果預測。
+              過程中累積了大規模資料處理、資料分析以及 AI 模型應用的實務經驗，
+              也培養了從資料理解、模型建立到結果分析的完整研究能力。
+              <br><br>
+              大學畢業於中山醫學大學( Chung Shan Medical University, CSMU)醫學資訊學系，
+              在學期間培養了醫療資訊與程式設計的基礎能力，
+              包含<b>資料處理、資料庫管理與系統開發</b>。
+              大學期間曾於<b>醫院 AI 中心擔任研究助理</b>，參與臨床資料處理、系統開發以及NLP開發相關工作，
+              負責醫療文本資料整理、<b>N-gram</b> 分析與資料清理，並使用 <b>Django framework</b> 協助建置臨床人員使用的資訊系統。
+              透過實務專案，我逐步累積了處理醫療資料與開發系統的經驗，也培養了將資訊技術應用於醫療場域的能力。
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">3. 實習經驗</div>
+          <div class="intern-list">
+            <div class="intern-entry">
+              <div class="intern-head">
+                <div>中山附醫人工智慧中心 / 研究助理</div>
+                <div class="intern-time">2021/1 ~ 2023/1</div>
+              </div>
+              <ul class="intern-points">
+                <li>使用<b> NLP</b> 技術分析醫療非結構化文本並建立文字特徵。</li>
+                <li>建置與維護 <b>MSSQL </b>資料庫，負責資料表設計、SQL 語法撰寫與資料清洗，支援 AI 模型與系統後端需求。</li>
+                <li>以<b> Django </b>架構開發內部互動式 Web 系統（Python / HTML），整合前後端與資料庫，提供護理與研究人員使用。</li>
+                <li>將臨床規則轉換為 <b>Rule-based AI </b>邏輯，應用於自動化案例蒐集與判斷。</li>
+                <li>負責跨部門會議技術簡報與成果展示，清楚說明系統設計與研究進度。</li>
+                <li>設計管理用儀表板，使用<b> Power BI </b>將複雜醫療資料視覺化。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">4. 專長</div>
+
+          <div class="skill-group">
+            <div class="skill-label">Programming Language</div>
+            <div class="chip-row" aria-label="Programming Language">
+              <span class="chip"><span class="dot" aria-hidden="true"></span>Python</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>C</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-label">NLP Tools</div>
+            <div class="chip-row" aria-label="NLP Tools">
+              <span class="chip"><span class="dot" aria-hidden="true"></span>NLTK</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>spaCy</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>N-gram</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>MetaMap</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>NegEx</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-label">Web Framework</div>
+            <div class="chip-row" aria-label="Web Framework">
+              <span class="chip"><span class="dot" aria-hidden="true"></span>Django</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-label">Database</div>
+            <div class="chip-row" aria-label="Database">
+              <span class="chip"><span class="dot" aria-hidden="true"></span>MSSQL</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>MySQL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">5. 專案</div>
+          <div class="project-links">
+            <a href="thesis.html">1. 碩論</a>
+            <a href="capstone.html">2. 專題</a>
+            <a href="side-project.html">3. side project</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hint">鍾昕起</div>
+    </div>
+  </div>
+  <script>
+    const menuWrap = document.querySelector('.menu-wrap');
+    const menuBtn = document.querySelector('.menu-btn');
+    menuBtn.addEventListener('click', function(e) {
+      menuWrap.classList.toggle('open');
+      e.stopPropagation();
+    });
+    document.addEventListener('click', function() {
+      menuWrap.classList.remove('open');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>碩論專案 - Thesis</title>
+  <style>
+    :root {
+      --bg: #efe3cf;
+      --card: rgba(250, 241, 226, 0.95);
+      --text: #2f2218;
+      --muted: #6f5844;
+      --border: rgba(80, 56, 35, 0.28);
+      --accent: #8a5a2f;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', 'Noto Serif TC', 'PMingLiU', serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .menu-wrap {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 20;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .menu-btn {
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(250, 241, 226, 0.95);
+      box-shadow: 0 8px 20px rgba(66, 45, 28, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #4b3423;
+      margin: 2px 0;
+      border-radius: 2px;
+    }
+
+    .menu-list {
+      margin-left: 10px;
+      min-width: 190px;
+      background: rgba(250, 241, 226, 0.97);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 12px 24px rgba(66, 45, 28, 0.16);
+      padding: 10px 12px;
+      text-align: left;
+      opacity: 0;
+      transform: translateX(-8px);
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .menu-wrap:hover .menu-list,
+    .menu-wrap:focus-within .menu-list {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .menu-title {
+      font-weight: 900;
+      color: #4a3321;
+      margin-bottom: 7px;
+      border-bottom: 1px solid rgba(111, 88, 68, 0.28);
+      padding-bottom: 6px;
+    }
+
+    .menu-link {
+      display: block;
+      color: #3d2a1b;
+      text-decoration: none;
+      border-bottom: none;
+      padding: 6px 2px;
+      font-weight: 700;
+    }
+
+    .menu-link:hover {
+      text-decoration: underline;
+    }
+
+    .home-btn {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 20;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(250, 241, 226, 0.95);
+      box-shadow: 0 8px 20px rgba(66, 45, 28, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .home-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .home-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #4b3423;
+      display: block;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 14px auto;
+      padding: 20px 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 10px 24px rgba(66, 45, 28, 0.16);
+      padding: 20px;
+    }
+
+    h1 {
+      margin: 0 0 12px 0;
+      font-size: 1.35rem;
+      border-bottom: 1px solid rgba(111, 88, 68, 0.28);
+      padding-bottom: 8px;
+    }
+
+    .hl {
+      background: rgba(138, 90, 47, 0.13);
+      border-bottom: 1px dotted rgba(138, 90, 47, 0.65);
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+
+    .time-right {
+      text-align: right;
+      color: var(--muted);
+      font-weight: 850;
+      margin: 8px 0 14px 0;
+      line-height: 1.5;
+    }
+
+    .meta {
+      margin: 10px 0 14px 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .section-label {
+      font-weight: 900;
+      border-bottom: 1px dashed rgba(111, 88, 68, 0.35);
+      padding-bottom: 6px;
+      margin: 16px 0 10px 0;
+    }
+
+    p, li {
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(138, 90, 47, 0.45);
+    }
+
+    .img-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .img-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    .project-img {
+      width: 100%;
+      height: auto; /* 保持等比例縮放 */
+      display: block;
+      border-radius: 10px;
+      border: 1px solid rgba(80, 56, 35, 0.20);
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .img-caption {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+
+    .img-item {
+      text-align: left;
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        padding: 16px 12px;
+      }
+      .img-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-wrap" aria-label="Project Navigation">
+    <div class="menu-btn" aria-hidden="true">
+      <div>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <nav class="menu-list">
+      <div class="menu-title">專案分頁</div>
+      <a class="menu-link" href="thesis.html">1. 碩論</a>
+      <a class="menu-link" href="capstone.html">2. 專題</a>
+      <a class="menu-link" href="side-project.html">3. side project</a>
+    </nav>
+  </div>
+
+  <a class="home-btn" href="index.html" aria-label="返回主頁" title="返回主頁">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3l9 8h-3v10h-4V14H10v7H6V11H3l9-8z"></path>
+    </svg>
+  </a>
+
+  <div class="container">
+    <div class="card">
+      <h1>
+         Integrating Local and Global Clinical Concepts via Semantic Mapping with <span class="hl">MetaMap</span>
+        for Translated Chinese Emergency Department Texts: <span class="hl">Disposition Prediction</span>
+      </h1>
+
+      <div class="time-right">時間：2024/3 ~ 2025/8</div>
+
+      <ul>
+        <li>清理並處理急診院內 <span class="hl">810,000+ 資料集</span>，確保資料可用性</li>
+        <li>設計並實作 <span class="hl">NLP</span> 流程，處理非結構化急診文本，進行命名實體識別 <span class="hl">(NER)</span> 與臨床概念抽取</li>
+        <li>利用 <span class="hl">MetaMap</span> 與 <span class="hl">NegEx</span> 進行概念萃取與否定語意偵測，轉換為可用於 <span class="hl">ML</span> 的結構化特徵</li>
+        <li>挑選臨床重要特徵 <span class="hl">1,215 維</span> 並建立資料清理與轉換流程，提升模型準確度與可解釋性</li>
+        <li>建立多組資料進行<span class="hl">出院動向預測</span>，進行參數調整與<span class="hl">交叉驗證</span></li>
+        <li>模型結果分析，證實非結構化文章內資訊萃取方法有效於<span class="hl">出院動向預測</span></li>
+      </ul>
+
+      <div class="meta">
+        碩博士系統論文頁面：
+        <a
+          href="https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dnclcdr&s=id=%22113NCU05114023%22.&searchmode=basic"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="color:#2563eb; text-decoration: underline; border-bottom: none;"
+        >
+          由此進入
+        </a>
+      </div>
+
+      <div class="section-label">圖示（Figures）</div>
+      <div class="img-grid" aria-label="Thesis Figures">
+        <div class="img-item full">
+          <img class="project-img" src="thesis/dataclean.png" alt="資料清理流程圖">
+          <div class="img-caption">圖 1：資料清理（Data Cleaning）</div>
+        </div>
+        <div class="img-item">
+          <img class="project-img" src="thesis/ner.png" alt="命名實體識別（NER）示意圖">
+          <div class="img-caption">圖 2：Workflow</div>
+        </div>
+        <div class="img-item">
+          <img class="project-img" src="thesis/workflow.png" alt="NLP 流程與工作流程圖">
+          <div class="img-caption">圖 3：MetaMap</div>
+        </div>
+      </div>
+
+      <p style="margin-top: 14px;"><a href="index.html">返回主頁</a></p>
+    </div>
+  </div>
+</body>
+</html>
