@@ -294,5 +294,16 @@
       <p style="margin-top: 14px;"><a href="index.html">返回主頁</a></p>
     </div>
   </div>
+  <script>
+    const menuWrap = document.querySelector('.menu-wrap');
+    const menuBtn = document.querySelector('.menu-btn');
+    menuBtn.addEventListener('click', function(e) {
+      menuWrap.classList.toggle('open');
+      e.stopPropagation();
+    });
+    document.addEventListener('click', function() {
+      menuWrap.classList.remove('open');
+    });
+  </script>
 </body>
 </html>
