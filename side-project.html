@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Side Project - RAG System</title>
+  <title>Side Project - RAG System（升級版）</title>
   <style>
     :root {
       --bg: #efe3cf;
@@ -36,7 +36,7 @@
     }
 
     h1 {
-      margin: 0 0 12px 0;
+      margin: 0 0 4px 0;
       font-size: 1.35rem;
       border-bottom: 1px solid rgba(111, 88, 68, 0.28);
       padding-bottom: 8px;
@@ -63,10 +63,11 @@
       text-align: right;
       color: var(--muted);
       font-weight: 850;
-      margin: 8px 0 14px 0;
+      margin: 6px 0 14px 0;
       line-height: 1.5;
     }
 
+    /* ── Navigation ── */
     .menu-wrap {
       position: fixed;
       top: 14px;
@@ -114,7 +115,7 @@
     }
 
     .menu-wrap:hover .menu-list,
-    .menu-wrap:focus-within .menu-list {
+    .menu-wrap.open .menu-list {
       opacity: 1;
       transform: translateX(0);
       pointer-events: auto;
@@ -169,18 +170,94 @@
       display: block;
     }
 
+    /* ── Section Label ── */
     .section-label {
       font-weight: 900;
       border-bottom: 1px dashed rgba(111, 88, 68, 0.35);
       padding-bottom: 6px;
-      margin: 18px 0 10px 0;
+      margin: 22px 0 12px 0;
     }
 
+    /* ── Experiment Blocks ── */
+    .exp-block {
+      border: 1px solid rgba(138, 90, 47, 0.22);
+      border-radius: 8px;
+      margin: 10px 0;
+      overflow: hidden;
+    }
+
+    .exp-header {
+      background: rgba(138, 90, 47, 0.09);
+      padding: 8px 14px;
+      font-weight: 900;
+      font-size: 0.97em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .exp-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background: var(--accent);
+      color: #fdf5e8;
+      border-radius: 50%;
+      font-size: 0.82em;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .exp-body {
+      padding: 10px 14px 12px;
+      font-size: 0.96em;
+      line-height: 1.75;
+    }
+
+    /* ── Tables ── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94em;
+      margin: 10px 0 4px;
+    }
+
+    .data-table th {
+      background: rgba(138, 90, 47, 0.12);
+      color: var(--text);
+      font-weight: 900;
+      padding: 7px 12px;
+      text-align: left;
+      border: 1px solid rgba(138, 90, 47, 0.22);
+    }
+
+    .data-table td {
+      padding: 7px 12px;
+      border: 1px solid rgba(138, 90, 47, 0.16);
+      vertical-align: top;
+    }
+
+    .data-table tr:nth-child(even) td {
+      background: rgba(138, 90, 47, 0.04);
+    }
+
+    .data-table .best td {
+      background: rgba(138, 90, 47, 0.10);
+      font-weight: 700;
+    }
+
+    .score-high { color: #5a7a3a; font-weight: 700; }
+    .score-mid  { color: #b07030; font-weight: 700; }
+    .score-low  { color: #a03030; font-weight: 700; }
+
+    /* ── Architecture Block ── */
     .arch-block {
       background: rgba(138, 90, 47, 0.06);
       border: 1px solid rgba(138, 90, 47, 0.18);
       border-radius: 8px;
-      padding: 14px 20px;
+      padding: 16px 20px;
       margin: 10px 0;
       font-size: 0.97em;
       line-height: 2;
@@ -193,8 +270,14 @@
       background: rgba(138, 90, 47, 0.12);
       border: 1px solid rgba(138, 90, 47, 0.28);
       border-radius: 6px;
-      padding: 2px 12px;
+      padding: 2px 14px;
       margin: 2px 0;
+    }
+
+    .arch-block .step.highlight {
+      background: rgba(138, 90, 47, 0.22);
+      border-color: rgba(138, 90, 47, 0.45);
+      font-weight: 700;
     }
 
     .arch-block .arrow {
@@ -204,76 +287,84 @@
       line-height: 1.4;
     }
 
-    .demo-block {
-      background: rgba(138, 90, 47, 0.06);
-      border: 1px solid rgba(138, 90, 47, 0.18);
-      border-radius: 8px;
-      padding: 14px 18px;
+    /* ── Highlight Cards (技術亮點) ── */
+    .highlight-item {
+      border-left: 3px solid var(--accent);
+      padding: 8px 14px;
       margin: 10px 0;
-      font-size: 0.96em;
-      line-height: 1.8;
+      background: rgba(138, 90, 47, 0.04);
+      border-radius: 0 6px 6px 0;
     }
 
-    .demo-label {
+    .highlight-item .hi-title {
       font-weight: 900;
-      color: var(--accent);
       margin-bottom: 4px;
     }
 
-    .demo-quote {
-      font-style: italic;
+    .highlight-item .hi-body {
+      font-size: 0.95em;
+      line-height: 1.7;
       color: var(--text);
-      margin: 0 0 10px 8px;
     }
 
-    .demo-list {
-      margin: 0 0 10px 8px;
-      padding-left: 18px;
+    .highlight-item ul {
+      margin: 4px 0;
+      padding-left: 20px;
     }
 
-    .img-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .img-grid .full {
-      grid-column: 1 / -1;
-    }
-
-    .project-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 10px;
-      border: 1px solid rgba(80, 56, 35, 0.20);
-      background: rgba(255, 255, 255, 0.25);
-    }
-
-    .img-placeholder {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 10px;
-      border: 1px dashed rgba(138, 90, 47, 0.45);
+    /* ── Demo Block ── */
+    .demo-scenario {
       background: rgba(138, 90, 47, 0.05);
-      color: var(--muted);
-      font-size: 0.95em;
+      border: 1px solid rgba(138, 90, 47, 0.18);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 10px 0;
     }
 
-    .img-caption {
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 0.95em;
-      line-height: 1.5;
-      text-align: left;
+    .demo-scenario-label {
+      font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 0.96em;
     }
 
-    .img-item {
-      text-align: left;
+    .demo-q, .demo-a {
+      display: flex;
+      gap: 10px;
+      margin: 5px 0;
+      font-size: 0.95em;
+      line-height: 1.75;
+    }
+
+    .demo-badge {
+      flex-shrink: 0;
+      font-weight: 900;
+      font-size: 0.85em;
+      padding: 1px 8px;
+      border-radius: 4px;
+      height: fit-content;
+      margin-top: 2px;
+    }
+
+    .badge-q {
+      background: rgba(80, 56, 35, 0.13);
+      color: var(--text);
+    }
+
+    .badge-a {
+      background: rgba(138, 90, 47, 0.18);
+      color: var(--accent);
+    }
+
+    /* ── Future / Tag Row ── */
+    .future-list {
+      margin: 4px 0;
+      padding-left: 20px;
+    }
+
+    .future-list li {
+      margin: 6px 0;
+      font-size: 0.96em;
     }
 
     .tag-row {
@@ -292,13 +383,192 @@
       color: var(--text);
     }
 
+    .note {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin: 6px 0 0;
+    }
+
+    .fig-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0 4px;
+    }
+
+    figure.chart-fig {
+      margin: 0;
+      border: 1px solid rgba(138, 90, 47, 0.18);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(250, 241, 226, 0.6);
+    }
+
+    figure.chart-fig img {
+      width: 100%;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(30, 18, 8, 0.88);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      border-radius: 8px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      font-size: 2rem;
+      color: #fdf5e8;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.85;
+    }
+
+    .lightbox-close:hover { opacity: 1; }
+
+    figure.chart-fig figcaption {
+      padding: 6px 10px;
+      font-size: 0.87em;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid rgba(138, 90, 47, 0.14);
+    }
+
+    /* ── Flowchart (兩欄文字流程) ── */
+    .flow-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 10px 0;
+    }
+
+    .flow-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flow-col-title {
+      font-weight: 900;
+      font-size: 0.95em;
+      text-align: center;
+      padding: 6px 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+    }
+
+    .flow-col-title.exp-title {
+      background: rgba(50, 80, 140, 0.1);
+      border: 1px solid rgba(50, 80, 140, 0.28);
+      color: #2d4a7a;
+    }
+
+    .flow-col-title.rag-title {
+      background: rgba(50, 110, 50, 0.1);
+      border: 1px solid rgba(50, 110, 50, 0.28);
+      color: #2a5c2a;
+    }
+
+    .flow-step {
+      border-radius: 7px;
+      padding: 7px 12px;
+    }
+
+    .flow-step.exp-step {
+      border: 1px solid rgba(50, 80, 140, 0.22);
+      background: rgba(50, 80, 140, 0.06);
+    }
+
+    .flow-step.rag-step {
+      border: 1px solid rgba(50, 110, 50, 0.22);
+      background: rgba(50, 110, 50, 0.06);
+    }
+
+    .flow-step-title {
+      font-weight: 700;
+      font-size: 0.94em;
+    }
+
+    .flow-step-sub {
+      font-size: 0.87em;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .flow-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .flow-decision {
+      flex-shrink: 0;
+      font-size: 0.84em;
+      font-weight: 700;
+      color: #8a2020;
+      background: rgba(180, 40, 40, 0.09);
+      border: 1px solid rgba(180, 40, 40, 0.28);
+      border-radius: 5px;
+      padding: 2px 8px;
+      white-space: nowrap;
+    }
+
+    .flow-arrow {
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.95em;
+    }
+
+    .flow-bottom {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border: 1px dashed rgba(138, 90, 47, 0.3);
+      border-radius: 8px;
+      background: rgba(138, 90, 47, 0.04);
+      font-size: 0.92em;
+    }
+
+    .flow-bottom-title {
+      font-weight: 900;
+      margin-bottom: 6px;
+      color: var(--muted);
+    }
+
+    .flow-bottom-body li {
+      margin: 4px 0;
+      color: var(--muted);
+    }
+
     @media (max-width: 620px) {
-      .container {
-        padding: 16px 12px;
-      }
-      .img-grid {
-        grid-template-columns: 1fr;
-      }
+      .flow-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .container { padding: 16px 12px; }
+      .data-table { font-size: 0.87em; }
+      .data-table th, .data-table td { padding: 5px 8px; }
+      .fig-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -315,7 +585,7 @@
       <div class="menu-title">專案分頁</div>
       <a class="menu-link" href="thesis.html">1. 碩論</a>
       <a class="menu-link" href="capstone.html">2. 專題</a>
-      <a class="menu-link" href="side-project.html">3. Side Project</a>
+      <a class="menu-link" href="side-project.html">3. AI Side Project (RAG)</a>
     </nav>
   </div>
 
@@ -327,101 +597,353 @@
 
   <div class="container">
     <div class="card">
-      <h1>LangChain-Based <span class="hl">RAG</span> System for Emergency Department Medical Records</h1>
 
-      <div class="time-right">Side Project</div>
+      <h1>大型語言模型對急診病歷快速檢索並提供有據可查的問答 <br>
+        LangChain-Based <span class="hl">Medical RAG System</span></h1>
+      <div class="time-right">Side Project｜2025.12–2026.2</div>
 
-      <div class="section-label">Project Overview</div>
-      <ul>
-        <li>建構針對急診病歷的 <span class="hl">Retrieval-Augmented Generation (RAG)</span> 查詢系統</li>
-        <li>處理 <span class="hl">50,000+</span> 筆非結構化臨床病歷，轉換為語義向量嵌入</li>
-        <li>結合 <span class="hl">FAISS</span> 向量資料庫與 <span class="hl">LLM(gpt-4o)</span>，使模型回覆有依據地根植於檢索的病歷內容</li>
-      </ul>
+      <!-- 專案概述 -->
+      <div class="section-label">專案概述</div>
+      <p>
+        針對急診病歷建構 <span class="hl">Retrieval-Augmented Generation（RAG）</span>問答專案，
+        用 AI 讓系統從急診紀錄裡找出答案，並標明來源。
+        內容涵蓋<span class="hl">透過實驗選定最佳 Embedding 模型與參數組合</span>、<span class="hl">FAISS</span> 向量檢索、到 <span class="hl">RAGAS</span> 量化評估，每個技術決策都有數據支撐。
+        確保系統回答有依據、可追溯。
+      </p>
 
-      <div class="img-grid" aria-label="Overview Figure">
-        <div class="img-item full">
-          <img class="project-img" src="sideproject/LLMworkflow.png" alt="LLM RAG Workflow">
-          <div class="img-caption">LLMworkflow：整體 RAG 系統流程，從病歷輸入至 LLM 生成回覆</div>
+      <!-- 實驗流程 -->
+      <div class="section-label">實驗流程與選擇依據</div>
+
+      <div class="exp-block">
+        <div class="exp-header">
+          <span class="exp-num">①</span>資料規模實驗
+        </div>
+        <div class="exp-body">
+          比較 5K / 20K / 50K 三種規模的 retrieval 品質，觀察到 5K→20K 改善顯著，20K→50K 收斂，
+          選定 <strong>50,000 筆</strong>作為 cost-performance 平衡點。
         </div>
       </div>
 
-      <div class="section-label">System Architecture</div>
-      <div class="arch-block" aria-label="System Architecture Diagram">
-        <span class="step">Medical Records</span>
-        <span class="arrow">↓</span>
-        <span class="step">Text Preprocessing</span>
-        <span class="arrow">↓</span>
-        <span class="step">Chunking</span>
-        <span class="arrow">↓</span>
-        <span class="step">MiniLM Embedding</span>
-        <span class="arrow">↓</span>
-        <span class="step">FAISS Vector DB</span>
-        <span class="arrow">↓</span>
-        <span class="step">Retriever</span>
-        <span class="arrow">↓</span>
-        <span class="step">Prompt Template</span>
-        <span class="arrow">↓</span>
-        <span class="step">LLM</span>
-        <span class="arrow">↓</span>
-        <span class="step">Answer</span>
+      <div class="exp-block">
+        <div class="exp-header">
+          <span class="exp-num">②</span>文本長度分析(Chunk Size)
+        </div>
+        <div class="exp-body">
+          分析資料分布後發現平均長度僅 <strong>167 字</strong>、最長 <strong>464 字</strong>，69.3% 的文本在 100~200 字之間，
+          選定 <strong>chunk_size=200，overlap=20</strong>。
+        </div>
       </div>
 
-      <div class="section-label">Technical Stack</div>
-      <div class="tag-row">
-        <span class="tag">Python</span>
-        <span class="tag">LangChain</span>
-        <span class="tag">MiniLM Embedding Model</span>
-        <span class="tag">FAISS Vector Database</span>
-        <span class="tag">Prompt Engineering</span>
-        <span class="tag">Colab</span>
-        <span class="tag">OpenAI API</span>
+      <div class="exp-block">
+        <div class="exp-header">
+          <span class="exp-num">③</span>Embedding 模型比較
+        </div>
+        <div class="exp-body">
+          在統一 Cosine Similarity 尺度下比較三個模型：
+          <table class="data-table" style="margin-top:10px;">
+            <thead>
+              <tr>
+                <th>模型</th>
+                <th>Cosine Similarity（50K）</th>
+                <th>建庫時間</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>MiniLM</td>
+                <td>0.6870</td>
+                <td>102 秒</td>
+              </tr>
+              <tr>
+                <td>Text2Vec</td>
+                <td>0.6947</td>
+                <td>342 秒</td>
+              </tr>
+              <tr class="best">
+                <td>BAAI/bge-m3 ✓</td>
+                <td>0.7005</td>
+                <td>1056 秒</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="note">選定 <strong>BAAI/bge-m3</strong>，中英文混合醫療文本表現最佳。</p>
+          <div class="fig-grid">
+            <figure class="chart-fig">
+              <img src="sideproject/embedding_model_comparison%20(5).png" alt="三模型綜合比較表">
+              <figcaption>綜合數據：三模型 × 三資料規模（Cosine + 建庫時間）</figcaption>
+            </figure>
+            <figure class="chart-fig">
+              <img src="sideproject/embedding_model_comparison%20(6).png" alt="Cosine Similarity 折線圖">
+              <figcaption>Cosine Similarity 趨勢（5K / 20K / 50K）</figcaption>
+            </figure>
+            <figure class="chart-fig">
+              <img src="sideproject/embedding_model_comparison%20(2).png" alt="50K 建庫時間比較">
+              <figcaption>建庫時間比較（50K 資料）</figcaption>
+            </figure>
+            <figure class="chart-fig">
+              <img src="sideproject/embedding_model_comparison%20(3).png" alt="Query Cosine Similarity 熱圖">
+              <figcaption>四個 Query 的 Cosine Similarity 熱圖（50K）</figcaption>
+            </figure>
+          </div>
+        </div>
       </div>
 
+      <!-- 系統架構 -->
+      <div class="section-label">系統架構</div>
+      <div class="flow-grid">
+
+        <!-- 左欄：實驗決策流程 -->
+        <div class="flow-col">
+          <div class="flow-col-title exp-title">🔬 實驗決策流程</div>
+
+          <div class="flow-step exp-step">
+            <div class="flow-step-title">資料載入</div>
+            <div class="flow-step-sub">65,000 筆護理記錄（中英文混合）</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+
+          <div class="flow-step exp-step flow-row">
+            <div>
+              <div class="flow-step-title">文本長度分析(Chunk Size)</div>
+              <div class="flow-step-sub">平均 167 字｜最長 464 字</div>
+            </div>
+            <div class="flow-decision">→ 選 200字</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+
+          <div class="flow-step exp-step flow-row">
+            <div>
+              <div class="flow-step-title">規模實驗</div>
+              <div class="flow-step-sub">5K / 20K / 50K</div>
+            </div>
+            <div class="flow-decision">→ 選 50K</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+
+          <div class="flow-step exp-step flow-row">
+            <div>
+              <div class="flow-step-title">Embedding 模型比較</div>
+              <div class="flow-step-sub">MiniLM / BGE-M3 / Text2Vec</div>
+            </div>
+            <div class="flow-decision">→ 選 BGE-M3</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+
+         
+
+          <div class="flow-step exp-step">
+            <div class="flow-step-title">建正式 Vectorstore</div>
+            <div class="flow-step-sub">FAISS + BGE-M3 + 50K + Chunk 200</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+
+          <div class="flow-step exp-step">
+            <div class="flow-step-title">RAGAS 評估集設計</div>
+            <div class="flow-step-sub">30 筆（簡單 / 中等 / 難題 各 10 筆）</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+
+          <div class="flow-step exp-step">
+            <div class="flow-step-title">RAGAS 評估結果</div>
+            <div class="flow-step-sub">Faithfulness 0.82｜Context Recall 0.89｜Answer Relevancy 0.44</div>
+          </div>
+          
+        </div>
+
+        <!-- 右欄：RAG 系統流程 -->
+        <div class="flow-col">
+          <div class="flow-col-title rag-title">🚀 RAG 系統流程</div>
+
+          <div class="flow-step rag-step">
+            <div class="flow-step-title">使用者輸入問題</div>
+            <div class="flow-step-sub">語意搜尋 或 指定 Source ID</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+
+          <div class="flow-step rag-step">
+            <div class="flow-step-title">BGE-M3 向量化</div>
+            <div class="flow-step-sub">問題 → 1024 維向量（GPU 加速）</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+
+          <div class="flow-step rag-step">
+            <div class="flow-step-title">FAISS 向量檢索</div>
+            <div class="flow-step-sub">Top-5 Chunks</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+
+          <div class="flow-step rag-step">
+            <div class="flow-step-title">Context 組合</div>
+            <div class="flow-step-sub">5 個 Chunks + Source ID + Similarity 分數</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+
+          <div class="flow-step rag-step">
+            <div class="flow-step-title">Prompt 設計</div>
+            <div class="flow-step-sub">醫療助理角色 + 拒答機制 + 引用來源</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+
+          <div class="flow-step rag-step">
+            <div class="flow-step-title">GPT-4.1 生成回答</div>
+            <div class="flow-step-sub">含 [Source: ID] 引用</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+
+
+          <div class="flow-step rag-step">
+            <div class="flow-step-title">RAGAS 評估</div>
+            <div class="flow-step-sub">gpt-4.1-mini Judge｜Faithfulness / Context Recall / Answer Relevancy</div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- RAGAS 評估 -->
+      <div class="section-label">RAGAS 量化評估結果</div>
+      <p class="note" style="margin-bottom:10px;">
+        評估集：30 筆（簡單 / 中等 / 難題各 10 筆），以直接來自原文的資訊作為答案，可驗證。
+      </p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>分數</th>
+            <th>說明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Faithfulness</td>
+            <td class="score-high">0.82</td>
+            <td>82% 的回答有 context 依據，幻覺率控制良好</td>
+          </tr>
+          <tr>
+            <td>Context Recall</td>
+            <td class="score-high">0.89</td>
+            <td>89% 的相關資訊被正確撈回</td>
+          </tr>
+          <tr>
+            <td>Answer Relevancy</td>
+            <td class="score-low">0.44</td>
+            <td>偏低，因中英混合術語導致 judge 反推不穩定</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">
+        按難度分析：簡單和中等題的 Context Recall 達到滿分（1.00），難題下降至 0.67，符合預期。
+      </p>
+      <figure class="chart-fig" style="margin-top:14px;">
+        <img src="sideproject/ragas_evaluation.png" alt="RAGAS 評估結果">
+        <figcaption>RAGAS 評估詳細結果（30 筆測試集，簡單 / 中等 / 難題各 10 筆）</figcaption>
+      </figure>
+
+      <!-- 技術亮點 -->
+      <div class="section-label">技術亮點</div>
+
+      <div class="highlight-item">
+        <div class="hi-title">1. 實驗驅動的參數選擇</div>
+        <div class="hi-body">
+          資料規模、Embedding 模型、Chunk Size 均有實驗數據支撐，每個決策都可量化解釋。
+        </div>
+      </div>
+
+      <div class="highlight-item">
+        <div class="hi-title">2. LangChain FAISS Cosine Bug 修正</div>
+        <div class="hi-body">
+          發現 <code>DistanceStrategy.COSINE</code> 實際回傳 L2 距離的已知問題
+          （GitHub issue #428, #17333），改用 sklearn 手動計算確保正確性。
+        </div>
+      </div>
+
+      <div class="highlight-item">
+        <div class="hi-title">3. RAGAS 框架量化評估</div>
+        <div class="hi-body">
+          設計三難度評估集，用 gpt-4.1-mini 當 judge，產出 Faithfulness / Context Recall /
+          Answer Relevancy 三項指標。
+        </div>
+      </div>
+
+
+
+      <!-- Demo -->
       <div class="section-label">Demo</div>
-      <div class="demo-block">
-        <div class="demo-label">User Query</div>
-        <div class="demo-quote">"病人是否有意識不清的情況?"</div>
-        <!--
-        <div class="demo-label">Retrieved Records</div>
-        <ul class="demo-list">
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-        -->
-        <div class="demo-label">LLM Response</div>
-        <div class="demo-quote">
-          💡 檢索端信心度: 82.68%<br>
-          --------------------------------------------------<br>
-          根據提供的紀錄，病人有意識不清的情況。以下是相關的來源：<br><br>
 
-          1. 在 [Source: 6892] 中，病人被描述為「意識程度改變,無意識(GCS 3 ~ 8)」，這表明病人有嚴重的意識不清。
-          <br>2. 在 [Source: 48560] 中，病人被描述為「反應緩慢」和「drowsiness (+)」，這也顯示出意識不清的情況。
-          <br>3. 在 [Source: 21123] 中，病人被描述為「意識程度改變(GCS 9 ~ 13)」和「conscious drowsy」，這同樣顯示出意識不清的情況。
-          <br>4. 在 [Source: 8831] 中，病人被描述為「意識程度改變(GCS 9 ~ 13)」和「conscious partial recover in ED」，這也顯示出意識不清的情況。
-          <br>綜合信心分數：100%。
-
+      <div class="demo-scenario">
+        <div class="demo-scenario-label">語意搜尋</div>
+        <div class="demo-q">
+          <span class="demo-badge badge-q">問</span>
+          <span>病人是否有意識不清的情況？</span>
         </div>
-
-        <div style="margin-top:8px; color: var(--muted); font-size: 0.92em;">＊ 以上為實際結果範例</div>
+        <div class="demo-a">
+          <span class="demo-badge badge-a">答</span>
+          <span>
+            根據提供的紀錄，病人有意識不清的情況。<br>
+            [Source: 26185] 家人表示在家發現意識不清，主訴為 conscious disturbance。<br>
+            [Source: 47437] 病人被描述為意識程度改變（GCS 9~13）。
+          </span>
+        </div>
       </div>
 
-      <div class="section-label">圖示（Figures）</div>
-      <div class="img-grid" aria-label="Side Project Figures">
-        <div class="img-item full">
-          <img class="project-img" src="sideproject/demo1.png" alt="LLM RAG Workflow">
-          <div class="img-caption">Demo 成果截圖( 成功檢索並摘要 )</div>
+      <div class="demo-scenario">
+        <div class="demo-scenario-label">Source ID 精確查詢</div>
+        <div class="demo-q">
+          <span class="demo-badge badge-q">問</span>
+          <span>這位病人有什麼症狀？（source_id=26185）</span>
         </div>
-        <div class="img-item full">
-          <img class="project-img" src="sideproject/demo2.png" alt="LLM RAG Workflow">
-          <div class="img-caption">Demo 成果截圖( 模型抑制文章中未出現的幻覺資訊 )</div>
+        <div class="demo-a">
+          <span class="demo-badge badge-a">答</span>
+          <span>
+            病人有意識不清（conscious disturbance）[Source: 26185]。<br>
+            護理紀錄記載家人發現病人意識不清，明確列出無頭暈、無嘔吐、
+            無腹瀉、無發燒、無腹痛、無冒汗。
+          </span>
         </div>
-
       </div>
 
-      <p style="margin-top: 14px;"><a href="index.html">返回主頁</a></p>
+      <div class="demo-scenario">
+        <div class="demo-scenario-label">域外問題拒答</div>
+        <div class="demo-q">
+          <span class="demo-badge badge-q">問</span>
+          <span>進擊的巨人米卡莎有跟艾蓮在一起嗎？</span>
+        </div>
+        <div class="demo-a">
+          <span class="demo-badge badge-a">答</span>
+          <span>根據提供的紀錄，無法找到相關資訊。</span>
+        </div>
+      </div>
+      
+      <!-- Technical Stack -->
+      <div class="section-label">Technical Stack</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>類別</th>
+            <th>工具</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>語言</td><td>Python</td></tr>
+          <tr><td>框架</td><td>LangChain</td></tr>
+          <tr><td>Embedding 模型</td><td>BAAI/bge-m3、MiniLM、Text2Vec（實驗比較）</td></tr>
+          <tr><td>向量資料庫</td><td>FAISS</td></tr>
+          <tr><td>LLM</td><td>GPT-4.1（問答）、GPT-4.1-mini（RAGAS judge）</td></tr>
+          <tr><td>評估框架</td><td>RAGAS</td></tr>
+          <tr><td>開發環境</td><td>Google Colab（T4 GPU）</td></tr>
+          <tr><td>AI協作工具</td><td>Claude</td></tr>
+          <tr><td>其他</td><td>sklearn、HuggingFace、datasets</td></tr>
+        </tbody>
+      </table>
+
+      <p style="margin-top: 18px;"><a href="index.html">返回主頁</a></p>
     </div>
   </div>
+
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
   <script>
     const menuWrap = document.querySelector('.menu-wrap');
     const menuBtn = document.querySelector('.menu-btn');
@@ -431,6 +953,30 @@
     });
     document.addEventListener('click', function() {
       menuWrap.classList.remove('open');
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    document.querySelectorAll('figure.chart-fig img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+    }
+
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
     });
   </script>
 </body>
