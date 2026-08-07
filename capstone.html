@@ -60,8 +60,10 @@
     }
 
     .hl-red {
-      background: rgba(239, 68, 68, 0.12);
-      border-bottom: 1px dotted rgba(239, 68, 68, 0.55);
+      background: rgba(220, 38, 38, 0.16);
+      border-bottom: 2px solid rgba(185, 28, 28, 0.75);
+      color: #b91c1c;
+      font-weight: 800;
       padding: 0 4px;
       border-radius: 4px;
     }
@@ -208,6 +210,7 @@
       border-radius: 10px;
       border: 1px solid rgba(80, 56, 35, 0.20);
       background: rgba(255, 255, 255, 0.25);
+      cursor: zoom-in;
     }
 
     .project-img-compact {
@@ -215,7 +218,44 @@
       margin: 0 auto;
       height: auto;
       display: block;
+      cursor: zoom-in;
     }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(30, 18, 8, 0.88);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      border-radius: 8px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      font-size: 2rem;
+      color: #fdf5e8;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.85;
+    }
+
+    .lightbox-close:hover { opacity: 1; }
 
     .img-caption {
       margin-top: 6px;
@@ -238,6 +278,41 @@
       height: 640px;
       display: block;
       border: 0;
+    }
+
+    .highlight-item {
+      border-left: 3px solid var(--accent);
+      padding: 8px 14px;
+      margin: 10px 0;
+      background: rgba(138, 90, 47, 0.04);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .highlight-item .hi-title {
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .highlight-item .hi-body {
+      font-size: 0.95em;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    .tag {
+      background: rgba(138, 90, 47, 0.11);
+      border: 1px solid rgba(138, 90, 47, 0.28);
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-size: 0.92em;
+      color: var(--text);
     }
 
     @media (max-width: 620px) {
@@ -278,7 +353,7 @@
   <div class="container">
     <div class="card">
       <h1>
-        2. 專題：
+        專題：
         <span class="hl">Artificial Intelligence–Based</span>
         <span class="hl">Healthcare-Associated Bloodstream Infection</span>
         <span class="hl">Surveillance and Classification System</span>
@@ -287,43 +362,53 @@
       <div class="time-right">時間：2021/9 ~ 2023/2</div>
 
       <div class="meta">
-        本專題參加：<span class="hl">ISQua's 39th Poster Display</span>
+        <span class="hl hl-red">校內專題競賽第一名</span>，並代表參加 <span class="hl">ISQua's 39th Poster Display</span> 國際發表；系統已<span class="hl">實際部署於感染科使用</span>
       </div>
 
       <ul>
-        <li>從 <span class="hl">HIS</span> 系統挑選關鍵表格與欄位，與護理人員確認需求，建置專屬感染管控 <span class="hl">MSSQL</span> 資料庫，整合複雜資料支援後續分析</li>
-        <li>應用 <span class="hl">n-gram</span> 處理 <span class="hl">非結構化文本</span>，如：<span class="hl">檢驗報告</span>、<span class="hl">護理紀錄</span>，並摘錄出關鍵資訊</li>
-        <li>標準化收案流程以減少 <span class="hl hl-red">97%</span> 人工複查量</li>
-        <li>開發內部 <span class="hl">Web</span> 系統，供醫師與護理師進行智慧收案</li>
-        <li>維護後端功能，確保資料串接與系統穩定運行</li>
-        <li>建立全院感染儀表板，使用 <span class="hl">MSSQL</span> 與 <span class="hl">Power BI</span> 將統計數據視覺化</li>
+        <li>與感染科護理師多次<span class="hl">需求訪談</span>，把臨床判斷標準轉換成系統規則</li>
+        <li>資料模型由<span class="hl">事件導向</span>重構為<span class="hl">患者導向</span>，建置 <span class="hl">MSSQL</span> 感染管控資料庫</li>
+        <li>用 <span class="hl">n-gram</span> 從護理紀錄、檢驗報告等非結構化文本摘錄關鍵資訊</li>
+        <li>建立 <span class="hl">Rule-based Decision Support System</span>，收案時間從 <span class="hl hl-red">2–3 週</span>縮短至 <span class="hl hl-red">1 天</span>，減少 <span class="hl hl-red">97%</span> 人工複查</li>
+        <li>開發 <span class="hl">Web</span> 收案系統，AI 採<span class="hl">建議模式</span>，最終由護理師 double check</li>
+        <li>用 <span class="hl">Power BI</span> 建立全院感染儀表板</li>
       </ul>
+
+      <div class="highlight-item">
+        <div class="hi-title">資料建模：從「事件導向」重構為「患者導向」</div>
+        <div class="hi-body">原始醫院資料依照檢驗、護理紀錄等不同醫療事件分別儲存，護理師得跨多個子系統才能拼湊出一位患者的完整資訊。重新設計成以患者為中心的資料模型後，只需搜尋患者即可取得所有相關醫療事件，大幅提升查詢與篩選效率。</div>
+      </div>
+
+      <div class="highlight-item">
+        <div class="hi-title">需求訪談：把臨床判斷標準轉換成系統規則</div>
+        <div class="hi-body">醫療端流程與資訊端邏輯存在落差，與感染科護理師進行多次訪談釐清實際判斷標準。例如「住院天數」這種看似單純的條件，也得確認資訊端該用日期相減、還是精確計算到小時，避免系統判斷結果與臨床認知產生落差。</div>
+      </div>
 
       <div class="section-label">圖示（Figures）</div>
       <div class="img-grid" aria-label="Capstone Figures">
-        <div class="img-item full">
+        <div class="img-item">
           <img class="project-img-compact" src="capstone/HAIDefinitions.png" alt="HAI 定義規則">
-          <div class="img-caption">HAIDefinitions：依據本書所定義的規則做後續收案</div>
+          <div class="img-caption">① HAIDefinitions：依據本書所定義的規則做後續收案</div>
         </div>
 
-        <div class="img-item full">
+        <div class="img-item">
           <img class="project-img" src="capstone/restructure.png" alt="資料整合與清潔起始流程">
-          <div class="img-caption">Restructure：將複雜 HIS 資料做整合，作為資料清潔起始的重要部分</div>
-        </div>
-
-        <div class="img-item full">
-          <img class="project-img" src="capstone/CenterWeb.png" alt="整合成網頁成果">
-          <div class="img-caption">CenterWeb：將所有結果整合於單一網站，供護理師/醫師加速收案使用</div>
+          <div class="img-caption">② Restructure：將複雜 HIS 資料整合，重構為患者導向的資料模型</div>
         </div>
 
         <div class="img-item">
           <img class="project-img" src="capstone/NursingRecordNER.png" alt="患者生理資訊摘錄與警示">
-          <div class="img-caption">NursingRecordNER：從文章摘錄患者生理資訊，並加入警示符號與時間導向呈現</div>
+          <div class="img-caption">③ NursingRecordNER：從護理紀錄摘錄生理資訊，加入警示符號與時間軸呈現</div>
+        </div>
+
+        <div class="img-item">
+          <img class="project-img" src="capstone/CenterWeb.png" alt="整合成網頁成果">
+          <div class="img-caption">④ CenterWeb：整合為單一網站，供護理師/醫師收案使用</div>
         </div>
 
         <div class="img-item">
           <img class="project-img" src="capstone/powerbi.png" alt="Power BI 統計圖表">
-          <div class="img-caption">Distribution：針對收案結果與摘錄結果，以 Power BI 製作統計圖表</div>
+          <div class="img-caption">⑤ Dashboard：以 Power BI 製作全院感染統計圖表</div>
         </div>
       </div>
 
@@ -335,9 +420,26 @@
         <a href="capstone/poster2023.pdf" target="_blank" rel="noopener noreferrer">點此下載/開啟 poster2023.pdf</a>
       </p>
 
+      <div class="section-label">Technical Stack</div>
+      <div class="tag-row">
+        <span class="tag">使用者需求訪談</span>
+        <span class="tag">MSSQL Database</span>
+        <span class="tag">N-gram</span>
+        <span class="tag">Named Entity Recognition (NER)</span>
+        <span class="tag">Django</span>
+        <span class="tag">Power BI</span>
+        <span class="tag">Rule-based Decision Support</span>
+      </div>
+
       <p style="margin-top: 14px;"><a href="index.html">返回主頁</a></p>
     </div>
   </div>
+
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
   <script>
     const menuWrap = document.querySelector('.menu-wrap');
     const menuBtn = document.querySelector('.menu-btn');
@@ -347,6 +449,30 @@
     });
     document.addEventListener('click', function() {
       menuWrap.classList.remove('open');
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    document.querySelectorAll('.project-img, .project-img-compact').forEach(function(img) {
+      img.addEventListener('click', function() {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+    }
+
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
     });
   </script>
 </body>

@@ -151,6 +151,34 @@
       border-radius: 4px;
     }
 
+    .hl-red {
+      background: rgba(220, 38, 38, 0.16);
+      border-bottom: 2px solid rgba(185, 28, 28, 0.75);
+      color: #b91c1c;
+      font-weight: 800;
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+
+    .highlight-item {
+      border-left: 3px solid var(--accent);
+      padding: 8px 14px;
+      margin: 10px 0;
+      background: rgba(138, 90, 47, 0.04);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .highlight-item .hi-title {
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .highlight-item .hi-body {
+      font-size: 0.95em;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
     .time-right {
       text-align: right;
       color: var(--muted);
@@ -200,7 +228,55 @@
       border-radius: 10px;
       border: 1px solid rgba(80, 56, 35, 0.20);
       background: rgba(255, 255, 255, 0.25);
+      cursor: zoom-in;
     }
+
+    .project-img-half {
+      width: 55%;
+      margin: 0 auto;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+      border: 1px solid rgba(80, 56, 35, 0.20);
+      background: rgba(255, 255, 255, 0.25);
+      cursor: zoom-in;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(30, 18, 8, 0.88);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      border-radius: 8px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      font-size: 2rem;
+      color: #fdf5e8;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.85;
+    }
+
+    .lightbox-close:hover { opacity: 1; }
 
     .img-caption {
       margin-top: 6px;
@@ -210,6 +286,26 @@
 
     .img-item {
       text-align: left;
+    }
+
+    .img-item.center {
+      text-align: center;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    .tag {
+      background: rgba(138, 90, 47, 0.11);
+      border: 1px solid rgba(138, 90, 47, 0.28);
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-size: 0.92em;
+      color: var(--text);
     }
 
     @media (max-width: 620px) {
@@ -256,14 +352,28 @@
 
       <div class="time-right">時間：2024/3 ~ 2025/8</div>
 
+      <p style="margin: 4px 0 12px;">
+        急診壅塞是常見問題，TTAS 檢傷分級在病人剛到院時仍高度仰賴護理師臨床經驗判斷。<br>本研究希望結合結構化數據與非結構化臨床文本，建立輔助預測模型—加入篩選後的文本特徵，模型 <span class="hl hl-red">AUC 從 0.8058 提升至 0.8829（+0.077，相對改善約 9.6%）</span>。
+      </p>
+
       <ul>
-        <li>清理並處理急診院內 <span class="hl">810,000+ 資料集</span>，確保資料可用性</li>
-        <li>設計並實作 <span class="hl">NLP</span> 流程，處理非結構化急診文本，進行命名實體識別 <span class="hl">(NER)</span> 與臨床概念抽取</li>
-        <li>利用 <span class="hl">MetaMap</span> 與 <span class="hl">NegEx</span> 進行概念萃取與否定語意偵測，轉換為可用於 <span class="hl">ML</span> 的結構化特徵</li>
-        <li>挑選臨床重要特徵 <span class="hl">1,215 維</span> 並建立資料清理與轉換流程，提升模型準確度與可解釋性</li>
-        <li>建立多組資料進行<span class="hl">出院動向預測</span>，進行參數調整與<span class="hl">交叉驗證</span></li>
-        <li>模型結果分析，證實非結構化文章內資訊萃取方法有效於<span class="hl">出院動向預測</span></li>
+        <li>清理並處理急診院內 <span class="hl">810,000+ 資料集</span>，聚焦住院／出院二分類任務</li>
+        <li>使用 <span class="hl">MetaMap</span> 進行醫療概念抽取，將不同措辭（如 abdominal pain／stomach pain／AP）映射為標準化概念</li>
+        <li>參考 Yale 研究的 <span class="hl">900 項症狀特徵</span>，篩選出與急診預測相關的 <span class="hl">1,215 維</span>臨床特徵</li>
+        <li>設計三分類<span class="hl">否定語意編碼</span>，結合 <span class="hl">NegEx</span> 判斷症狀是否被否定</li>
+        <li>選用 <span class="hl">Random Forest</span> 建模，兼顧非線性關係處理與可解釋性</li>
+        <li>比較不同文本來源，發現<span class="hl">護理紀錄</span>對預測結果影響最大</li>
       </ul>
+
+      <div class="highlight-item">
+        <div class="hi-title">模型選型與否定語意編碼</div>
+        <div class="hi-body">選擇 Random Forest 是因為資料已轉換為結構化 Feature，該模型能處理非線性關係，並提供 Feature Importance 提升可解釋性。針對否定語意（例如「有 fever，但否認 cough」），設計三分類編碼：<span class="hl">Fever = 1、Cough = -1</span>，區分「提及」與「提及但否定」兩種截然不同的臨床意義。</div>
+      </div>
+
+      <div class="highlight-item">
+        <div class="hi-title">特徵選擇：從 36,130 個 Concept 收斂到 1,215 個</div>
+        <div class="hi-body">MetaMap 擷取出的 Concept 數量龐大，但並非都與急診預測相關，因此把 Yale 文獻整理的 <span class="hl">900 個關鍵特徵</span>一併映射進同一概念空間比對：兩邊都有的全數採用，只有自己資料獨有的則再用 <span class="hl">semantic type</span> 與<span class="hl">詞頻</span>兩層篩選。特徵數因此從 <span class="hl">36,130 個</span>收斂到實際使用的 <span class="hl">1,215 個</span>，證明醫療自由文本裡有生理數值抓不到的臨床訊號。</div>
+      </div>
 
       <div class="meta">
         碩博士系統論文頁面：
@@ -279,8 +389,8 @@
 
       <div class="section-label">圖示（Figures）</div>
       <div class="img-grid" aria-label="Thesis Figures">
-        <div class="img-item full">
-          <img class="project-img" src="thesis/dataclean.png" alt="資料清理流程圖">
+        <div class="img-item full center">
+          <img class="project-img-half" src="thesis/dataclean.png" alt="資料清理流程圖">
           <div class="img-caption">圖 1：資料清理（Data Cleaning）</div>
         </div>
         <div class="img-item">
@@ -293,9 +403,29 @@
         </div>
       </div>
 
+      <div class="section-label">Technical Stack</div>
+      <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">Machine Learning</span>
+        <span class="tag">MetaMap</span>
+        <span class="tag">NegEx</span>
+        <span class="tag">NLP</span>
+        <span class="tag">Random Forest</span>
+        <span class="tag">Data Cleaning</span>
+        <span class="tag">Feature Engineering</span>
+        <span class="tag">Feature Importance</span>
+        <span class="tag">Cross-Validation</span>
+      </div>
+
       <p style="margin-top: 14px;"><a href="index.html">返回主頁</a></p>
     </div>
   </div>
+
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
   <script>
     const menuWrap = document.querySelector('.menu-wrap');
     const menuBtn = document.querySelector('.menu-btn');
@@ -305,6 +435,30 @@
     });
     document.addEventListener('click', function() {
       menuWrap.classList.remove('open');
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    document.querySelectorAll('.project-img, .project-img-half').forEach(function(img) {
+      img.addEventListener('click', function() {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+    }
+
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
     });
   </script>
 </body>

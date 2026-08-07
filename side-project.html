@@ -900,14 +900,14 @@
       <div class="section-label">技術亮點</div>
 
       <div class="highlight-item">
-        <div class="hi-title">1. 實驗驅動的參數選擇</div>
+        <div class="hi-title">實驗驅動的參數選擇</div>
         <div class="hi-body">
           資料規模、Embedding 模型、Chunk Size 均有實驗數據支撐，每個決策都可量化解釋。
         </div>
       </div>
 
       <div class="highlight-item">
-        <div class="hi-title">2. LangChain FAISS Cosine Bug 修正</div>
+        <div class="hi-title">LangChain FAISS Cosine Bug 修正</div>
         <div class="hi-body">
           發現 <code>DistanceStrategy.COSINE</code> 實際回傳 L2 距離的已知問題
           （GitHub issue #428, #17333），改用 sklearn 手動計算確保正確性。
@@ -915,7 +915,7 @@
       </div>
 
       <div class="highlight-item">
-        <div class="hi-title">3. RAGAS 框架量化評估</div>
+        <div class="hi-title">RAGAS 框架量化評估</div>
         <div class="hi-body">
           設計三難度評估集，用 gpt-4.1-mini 當 judge，產出 Faithfulness / Context Recall /
           Answer Relevancy 三項指標。
