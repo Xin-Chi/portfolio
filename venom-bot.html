@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venom-Bot</title>
+  <style>
+    :root {
+      --bg: #efe3cf;
+      --card: rgba(250, 241, 226, 0.95);
+      --text: #2f2218;
+      --muted: #6f5844;
+      --border: rgba(80, 56, 35, 0.28);
+      --accent: #8a5a2f;
+      --card-solid: #faf1e2;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', 'Noto Serif TC', 'PMingLiU', serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 14px auto;
+      padding: 20px 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 10px 24px rgba(66, 45, 28, 0.16);
+      padding: 20px;
+    }
+
+    h1 {
+      margin: 0 0 4px 0;
+      font-size: 1.35rem;
+      border-bottom: 1px solid rgba(111, 88, 68, 0.28);
+      padding-bottom: 8px;
+    }
+
+    p, li {
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(138, 90, 47, 0.45);
+    }
+
+    .hl {
+      background: rgba(138, 90, 47, 0.13);
+      border-bottom: 1px dotted rgba(138, 90, 47, 0.65);
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+
+    .time-right {
+      text-align: right;
+      color: var(--muted);
+      font-weight: 850;
+      margin: 6px 0 14px 0;
+      line-height: 1.5;
+    }
+
+    /* ── Navigation ── */
+    .menu-wrap {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 20;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .menu-btn {
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(250, 241, 226, 0.95);
+      box-shadow: 0 8px 20px rgba(66, 45, 28, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #4b3423;
+      margin: 2px 0;
+      border-radius: 2px;
+    }
+
+    .menu-list {
+      margin-left: 10px;
+      min-width: 190px;
+      background: rgba(250, 241, 226, 0.97);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 12px 24px rgba(66, 45, 28, 0.16);
+      padding: 10px 12px;
+      text-align: left;
+      opacity: 0;
+      transform: translateX(-8px);
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .menu-wrap:hover .menu-list,
+    .menu-wrap.open .menu-list {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .menu-title {
+      font-weight: 900;
+      color: #4a3321;
+      margin-bottom: 7px;
+      border-bottom: 1px solid rgba(111, 88, 68, 0.28);
+      padding-bottom: 6px;
+    }
+
+    .menu-link {
+      display: block;
+      color: #3d2a1b;
+      text-decoration: none;
+      border-bottom: none;
+      padding: 6px 2px;
+      font-weight: 700;
+    }
+
+    .menu-link:hover {
+      text-decoration: underline;
+    }
+
+    .home-btn {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 20;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(250, 241, 226, 0.95);
+      box-shadow: 0 8px 20px rgba(66, 45, 28, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .home-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .home-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #4b3423;
+      display: block;
+    }
+
+    /* ── Section Label ── */
+    .section-label {
+      font-weight: 900;
+      border-bottom: 1px dashed rgba(111, 88, 68, 0.35);
+      padding-bottom: 6px;
+      margin: 22px 0 12px 0;
+    }
+
+    .note { color: var(--muted); font-size: 0.9em; margin: 6px 0 0; }
+
+    /* ── Chips (format tags) ── */
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(138, 90, 47, 0.3);
+      background: rgba(138, 90, 47, 0.09);
+      font-weight: 850;
+      font-size: 0.93em;
+      color: #332317;
+    }
+    .chip .dot {
+      width: 7px; height: 7px; border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 3.5px rgba(138, 90, 47, 0.16);
+      flex: 0 0 auto;
+    }
+
+    /* ── Overview: text + companion photo ── */
+    .overview-row { display: flex; gap: 22px; align-items: flex-start; margin-top: 4px; }
+    .overview-text { flex: 1 1 auto; min-width: 0; }
+    .overview-photo { flex: 0 0 168px; width: 168px; margin: 0; }
+    .overview-photo img { width: 100%; display: block; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 7px 20px rgba(66, 45, 28, 0.14); cursor: zoom-in; }
+    .overview-photo figcaption { margin-top: 6px; font-size: 0.82em; color: var(--muted); text-align: center; }
+
+    /* ── HR/interviewer quick-scan summary ── */
+    .takeaway-box {
+      background: rgba(138, 90, 47, 0.07);
+      border: 1px solid rgba(138, 90, 47, 0.3);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 16px 0 4px;
+    }
+    .takeaway-box .tk-label {
+      font-weight: 900;
+      font-size: 0.82em;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .takeaway-box ul { margin: 0; padding-left: 20px; }
+    .takeaway-box li { font-size: 0.96em; line-height: 1.65; margin-bottom: 5px; }
+    .takeaway-box li:last-child { margin-bottom: 0; }
+    .takeaway-box li b { color: var(--text); }
+
+    /* ── Architecture diagram figure ── */
+    .diagram-figure { margin: 14px 0 4px; text-align: center; }
+    .diagram-figure svg { max-width: 100%; height: auto; color: var(--text); }
+    .diagram-figure figcaption { margin-top: 6px; }
+
+    /* ── Tables ── */
+    .table-wrap { overflow-x: auto; margin: 10px 0 4px; }
+    .table-wrap .data-table { margin: 0; }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94em;
+      margin: 10px 0 4px;
+    }
+
+    .data-table th {
+      background: rgba(138, 90, 47, 0.12);
+      color: var(--text);
+      font-weight: 900;
+      padding: 7px 12px;
+      text-align: left;
+      border: 1px solid rgba(138, 90, 47, 0.22);
+    }
+
+    .data-table td {
+      padding: 7px 12px;
+      border: 1px solid rgba(138, 90, 47, 0.16);
+      vertical-align: top;
+    }
+
+    .data-table tr:nth-child(even) td {
+      background: rgba(138, 90, 47, 0.04);
+    }
+
+    .score-high { color: #5a7a3a; font-weight: 700; }
+    .score-mid  { color: #b07030; font-weight: 700; }
+
+    /* ── Debugging blocks ── */
+    .exp-block {
+      border: 1px solid rgba(138, 90, 47, 0.22);
+      border-radius: 8px;
+      margin: 10px 0;
+      overflow: hidden;
+    }
+
+    .exp-header {
+      background: rgba(138, 90, 47, 0.09);
+      padding: 8px 14px;
+      font-weight: 900;
+      font-size: 0.97em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .exp-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background: var(--accent);
+      color: #fdf5e8;
+      border-radius: 50%;
+      font-size: 0.82em;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .exp-body {
+      padding: 10px 14px 12px;
+      font-size: 0.96em;
+      line-height: 1.75;
+    }
+
+    .win {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin: 0 14px 12px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(138, 90, 47, 0.25);
+      font-weight: 700;
+      font-size: 0.93em;
+      color: #4d6b35;
+    }
+    .win .mark { flex-shrink: 0; }
+
+    /* ── Highlight Cards (功能設計亮點) ── */
+    .highlight-item {
+      border-left: 3px solid var(--accent);
+      padding: 8px 14px;
+      margin: 10px 0;
+      background: rgba(138, 90, 47, 0.04);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .highlight-item .hi-title {
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .highlight-item .hi-body {
+      font-size: 0.95em;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    /* ── Tag Row (Technical Stack) ── */
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    .tag {
+      background: rgba(138, 90, 47, 0.11);
+      border: 1px solid rgba(138, 90, 47, 0.28);
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-size: 0.92em;
+      color: var(--text);
+    }
+
+    /* ── Screenshot grid ── */
+    .fig-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 14px 0 4px;
+    }
+
+    figure.chart-fig {
+      margin: 0;
+      border: 1px solid rgba(138, 90, 47, 0.18);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(250, 241, 226, 0.6);
+    }
+
+    figure.chart-fig img {
+      width: 100%;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(30, 18, 8, 0.88);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      border-radius: 8px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      font-size: 2rem;
+      color: #fdf5e8;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.85;
+    }
+
+    .lightbox-close:hover { opacity: 1; }
+
+    figure.chart-fig figcaption {
+      padding: 6px 10px;
+      font-size: 0.87em;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid rgba(138, 90, 47, 0.14);
+    }
+
+    @media (max-width: 620px) {
+      .container { padding: 16px 12px; }
+      .data-table { font-size: 0.87em; }
+      .data-table th, .data-table td { padding: 5px 8px; }
+      .fig-grid { grid-template-columns: 1fr; }
+      .overview-row { flex-direction: column; }
+      .overview-photo { flex: 0 0 auto; width: 100%; max-width: 220px; margin: 4px auto 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-wrap" aria-label="Project Navigation">
+    <div class="menu-btn" aria-hidden="true">
+      <div>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <nav class="menu-list">
+      <div class="menu-title">專案分頁</div>
+      <a class="menu-link" href="thesis.html">碩論</a>
+      <a class="menu-link" href="capstone.html">專題</a>
+      <a class="menu-link" href="side-project.html">醫療文章RAG檢索(AI RAG)</a>
+      <a class="menu-link" href="https://xin-chi.github.io/ai-news-pipeline/" target="_blank" rel="noopener">每日 AI 快報</a>
+      <a class="menu-link" href="venom-bot.html">Venom-Bot (AI Chatbot)</a>
+    </nav>
+  </div>
+
+  <a class="home-btn" href="index.html" aria-label="返回主頁" title="返回主頁">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3l9 8h-3v10h-4V14H10v7H6V11H3l9-8z"></path>
+    </svg>
+  </a>
+
+  <div class="container">
+    <div class="card">
+
+      <h1>Venom-Bot <br> LINE × Gemini <span class="hl">個人 AI 聊天機器人</span></h1>
+      <div class="time-right">Personal Project｜2026.6–2026.7（上線中，給多位朋友實測）</div>
+
+      <div class="takeaway-box">
+        <div class="tk-label">摘要</div>
+        <ul>
+          <li>獨立完成<b>端到端開發與維運</b>：架構設計、部署、上線後除錯、多人測試迭代，全程一人負責</li>
+          <li>支援 <b>7 種輸入格式</b>（文字／貼圖／圖片／語音／影片／PDF／連結），共用同一套記憶與防呆邏輯</li>
+          <li>反覆迭代<b>人設 Prompt 設計</b>，並對上線後的 bot 做過 Prompt Injection 資安自測</li>
+          <li>遇到 4 個真實工程挑戰（免費方案休眠、跨平台格式限制不對稱、隱藏 bug、PDF 成本抓錯指標），全部靠<b>實測數據</b>而非猜測解決</li>
+        </ul>
+      </div>
+
+      <div class="section-label">專案概述</div>
+      <div class="overview-row">
+        <div class="overview-text">
+          <p>
+            獨立設計並上線一個 <span class="hl">LINE × Gemini</span> 聊天機器人，後端以 <span class="hl">FastAPI</span> 自行開發、部署於 Render。
+            專案涵蓋機密保護、部署、上線後除錯，到多人測試後的穩定性修正，每個設計都以實測數據與真實 bug 驅動，而非紙上規劃。
+          </p>
+          <div class="chip-row" style="margin-top: 10px;">
+            <span class="chip"><span class="dot"></span>文字</span>
+            <span class="chip"><span class="dot"></span>貼圖</span>
+            <span class="chip"><span class="dot"></span>圖片</span>
+            <span class="chip"><span class="dot"></span>語音</span>
+            <span class="chip"><span class="dot"></span>影片</span>
+            <span class="chip"><span class="dot"></span>PDF</span>
+            <span class="chip"><span class="dot"></span>連結</span>
+          </div>
+        </div>
+        <figure class="overview-photo">
+          <img src="venombot/bot-profile.jpg" alt="LINE 官方帳號主頁">
+          <figcaption>LINE 官方帳號主頁</figcaption>
+        </figure>
+      </div>
+
+      <div class="section-label">系統架構</div>
+      <figure class="diagram-figure">
+        <svg viewBox="0 0 880 300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif" role="img" aria-label="系統資料流：使用者透過 LINE 傳送訊息，Render 上自建的 FastAPI 後端接收 webhook 後呼叫 Gemini API 產生回覆與可選表情包，再原路徑送回使用者；背景另有 GitHub push 觸發自動部署、UptimeRobot 每 5 分鐘保活、Render 提供表情包靜態檔案服務。">
+          <defs>
+            <marker id="vb-arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
+            </marker>
+          </defs>
+
+          <text x="197" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">傳送訊息</text>
+          <text x="197" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">多種訊息類型</text>
+          <text x="422" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">webhook 進線</text>
+          <text x="422" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">驗證身份</text>
+          <text x="672" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">呼叫 Gemini</text>
+          <text x="672" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">多模態理解</text>
+
+          <line x1="160" y1="80" x2="230" y2="80" stroke="currentColor" stroke-width="1.6" marker-end="url(#vb-arrow)"></line>
+          <line x1="385" y1="80" x2="455" y2="80" stroke="currentColor" stroke-width="1.6" marker-end="url(#vb-arrow)"></line>
+          <line x1="640" y1="80" x2="700" y2="80" stroke="currentColor" stroke-width="1.6" marker-end="url(#vb-arrow)"></line>
+
+          <line x1="230" y1="104" x2="160" y2="104" stroke="currentColor" stroke-width="1.3" opacity="0.7" marker-end="url(#vb-arrow)"></line>
+          <line x1="455" y1="104" x2="385" y2="104" stroke="currentColor" stroke-width="1.3" opacity="0.7" marker-end="url(#vb-arrow)"></line>
+          <line x1="700" y1="104" x2="640" y2="104" stroke="currentColor" stroke-width="1.3" opacity="0.7" marker-end="url(#vb-arrow)"></line>
+
+          <text x="197" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">回覆訊息</text>
+          <text x="422" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">送出回覆</text>
+          <text x="672" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">回覆 ＋ 表情包</text>
+
+          <rect x="10" y="60" width="150" height="60" rx="8" fill="var(--card-solid)" stroke="currentColor" stroke-width="1.4"></rect>
+          <text x="85" y="87" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">使用者</text>
+          <text x="85" y="103" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">本人＋5位朋友</text>
+
+          <rect x="235" y="60" width="150" height="60" rx="8" fill="var(--card-solid)" stroke="currentColor" stroke-width="1.4"></rect>
+          <text x="310" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">LINE 平台</text>
+
+          <rect x="460" y="60" width="180" height="60" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.4"></rect>
+          <text x="550" y="87" text-anchor="middle" font-size="14" font-weight="800" fill="#fdf5e8">Render</text>
+          <text x="550" y="103" text-anchor="middle" font-size="10" fill="#fdf5e8" opacity="0.92">FastAPI・自建後端</text>
+
+          <rect x="705" y="60" width="165" height="60" rx="8" fill="var(--card-solid)" stroke="currentColor" stroke-width="1.4"></rect>
+          <text x="787" y="87" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Gemini API</text>
+          <text x="787" y="103" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">flash-lite</text>
+
+          <rect x="300" y="210" width="160" height="56" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.85"></rect>
+          <text x="380" y="242" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.85">UptimeRobot</text>
+
+          <rect x="480" y="210" width="160" height="56" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.85"></rect>
+          <text x="560" y="235" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.85">GitHub</text>
+          <text x="560" y="250" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">private repo</text>
+
+          <rect x="665" y="210" width="150" height="56" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.85"></rect>
+          <text x="740" y="235" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.85">/memes/*.png</text>
+          <text x="740" y="250" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">表情包</text>
+
+          <line x1="380" y1="210" x2="505" y2="121" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6" marker-end="url(#vb-arrow)"></line>
+          <text x="330" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">每 5 分鐘保活</text>
+
+          <line x1="560" y1="210" x2="560" y2="121" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6" marker-end="url(#vb-arrow)"></line>
+          <text x="595" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">push 觸發部署</text>
+
+          <line x1="615" y1="121" x2="725" y2="209" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6" marker-end="url(#vb-arrow)"></line>
+          <text x="700" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">靜態檔案服務</text>
+        </svg>
+        <figcaption class="note">圖 1 — 系統資料流。中央<b>Render／FastAPI</b>是全部自行開發的後端；（LINE、Gemini、GitHub、UptimeRobot）為串接的外部服務。</figcaption>
+      </figure>
+
+      <div class="section-label">輸入限制與防呆設計</div>
+      <p class="note">每種訊息類型都有各自的把關規則，全部在呼叫 Gemini 之前擋下，避免浪費額度。</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>類型</th><th>上限</th><th>判斷方式</th></tr></thead>
+          <tbody>
+            <tr><td>文字</td><td class="score-high">500 字</td><td>超過直接罐頭回覆，不呼叫 Gemini</td></tr>
+            <tr><td>語音</td><td class="score-high">2 分 01 秒</td><td>讀 LINE 訊息自帶的 duration 欄位，免下載即可判斷</td></tr>
+            <tr><td>影片</td><td class="score-high">31 秒</td><td>同上；通過上限的影片一律用低畫質模式送出，省 token</td></tr>
+            <tr><td>PDF</td><td class="score-high">6 頁</td><td>先以 20MB 做粗篩，通過後下載、用 <code>pypdf</code> 實際數頁數</td></tr>
+            <tr><td>其他檔案格式</td><td>不支援</td><td>非 PDF 直接罐頭回覆，不下載</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-label">除錯歷程</div>
+
+      <div class="exp-block">
+        <div class="exp-header"><span class="exp-num">①</span>免費方案的「休眠」問題，得自己接外部服務解決</div>
+        <div class="exp-body">
+          Render 免費方案閒置 15 分鐘會自動休眠，冷啟動需約 60 秒——比 LINE 本身的回應時限還長，
+          使用者第一次傳訊息很可能完全等不到回覆，體驗上很像「機器人壞了」。解法是要有人定期從外部打進來保持清醒，但同樣得在免費額度內做到。
+          原本想用 GitHub Actions 排程，查了才發現 private repo 每次執行最少算 1 分鐘，5–10 分鐘頻率一個月會燒掉約 4,320 分鐘，遠超 2,000 分鐘的免費額度，大約 14 天就會用罄。
+        </div>
+        <div class="win"><span class="mark">✓</span>改用 UptimeRobot，免費方案每 5 分鐘 ping 一次，額度用不完，完全不用人工介入確認，實現 0 成本</div>
+      </div>
+
+      <div class="exp-block">
+        <div class="exp-header"><span class="exp-num">②</span>朋友多人測試揪出的兩個隱藏 bug</div>
+        <div class="exp-body">
+          一次朋友連續傳 30 張圖片，才發現訊息處理失敗時沒有妥善的容錯機制，會拖累整批訊息都收不到回覆。
+          同時也發現「呼叫太頻繁被 Gemini 暫時拒絕」的重試邏輯寫成<b>全體共用</b>，一人狂傳會連帶讓完全沒亂傳的其他人也已讀不回。
+        </div>
+        <div class="win"><span class="mark">✓</span>補上容錯機制讓單則失敗不影響其他訊息，並把限流狀態改成以每個使用者獨立計算。兩個問題都是靠朋友實測才浮現，不是事前能猜到的</div>
+      </div>
+
+      <div class="exp-block">
+        <div class="exp-header"><span class="exp-num">③</span>多模態輸入的「能傳」跟「能處理」常常對不上</div>
+        <div class="exp-body">
+          LINE 允許使用者傳到 200MB 的檔案，但 Gemini 語音只吃 20MB、影片只吃 100MB，兩邊限制完全不對稱，得自己另外加一層防呆。
+          而且該用哪個指標（檔案大小／時長／頁數）才抓得住真正的成本，每種媒體類型還不一樣，得個別驗證才知道。
+        </div>
+        <div class="win"><span class="mark">✓</span>語音、影片改用 LINE 訊息自帶的<span class="hl">時長</span>判斷，三種媒體、三套各自驗證過的防呆標準</div>
+      </div>
+
+      <div class="exp-block">
+        <div class="exp-header"><span class="exp-num">④</span>PDF 用「檔案大小」限制成本，其實抓錯了指標</div>
+        <div class="exp-body">
+          一開始以為檔案大小能有效限制 token 成本，實測後發現：一份僅 0.28MB、300 頁的純文字 PDF，要吃掉 160,168 tokens，單次就用掉每分鐘額度的 64%。
+          檔案大小跟頁數完全不成比例。
+        </div>
+        <div class="win"><span class="mark">✓</span>查明後發現Gemini處理pdf檔案是用頁數固定258 token計算。改用以 pypdf 實際算頁數把關（6 頁上限），才是真正抓得住成本的指標</div>
+      </div>
+
+      <div class="highlight-item">
+        <div class="hi-title">這四個挑戰的共通點</div>
+        <div class="hi-body">光讀文件或憑直覺猜不到答案，得靠真實資料實測，甚至嚴謹的比較才找得到真相，而且結果常與一開始的假設完全相反。</div>
+      </div>
+
+      <div class="section-label">功能設計亮點</div>
+
+      <div class="highlight-item">
+        <div class="hi-title">結構化輸出一次呼叫完成回覆＋表情包判斷</div>
+        <div class="hi-body">用結構化輸出讓 Gemini 在同一次呼叫裡同時產生回覆文字與可選的表情包 ID，不需額外請求；<span class="hl">表情包</span>依Gemini判斷後設計即使情境符合,也只有 25% 機率真的附圖,增加訊息傳送的變化性。</div>
+      </div>
+      <div class="highlight-item">
+        <div class="hi-title">人設語氣的迭代設計（Prompt Engineering）</div>
+        <div class="hi-body">初版人設「有點嗆」被朋友反饋太衝，兩輪調整成「禮貌有理、偶爾吐槽」；另外加上「提到作者要恭敬」的規則，上線後又發現模型會自己主動搬出作者當話題，再追加「不能主動提起」修正。每次調整都要重新測過<span class="hl">說話模式、故意找碴、提到作者</span>等情境，確認新語氣沒有意外副作用。</div>
+      </div>
+      <div class="highlight-item">
+        <div class="hi-title">Prompt Injection 自我測試</div>
+        <div class="hi-body">對已上線 bot 實測多種常見手法（洩漏系統設定、指令覆蓋、突破字數限制、誘導亂編答案、角色扮演越獄），<span class="hl">全數擋下</span>；有被使用者逼迫透漏的內容也純屬虛構，非實際方法與技術。</div>
+      </div>
+
+      <div class="section-label">成本與額度盤點</div>
+      <p class="note">全部服務停留在免費方案。</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>項目</th><th>數字</th><th>備註</th></tr></thead>
+          <tbody>
+            <tr><td>Gemini RPM / TPM / RPD</td><td>15 / 250,000 / 500</td><td>選擇Gemini API理由：時間段中額度沒有超標，就可以達到長期免費</td></tr>
+            <tr><td>文字對話（12 輪記憶）</td><td class="score-high">約 267 tokens／次</td><td>遠低於每分鐘上限</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-label">實際畫面</div>
+      <div class="fig-grid">
+        <figure class="chart-fig">
+          <img src="venombot/input-demo.jpg" alt="多種輸入格式同時運作">
+          <figcaption>貼圖回覆、圖片影片理解、語音辨識、文字問答、...</figcaption>
+        </figure>
+        <figure class="chart-fig">
+          <img src="venombot/prompt-injection.jpg" alt="Prompt Injection 自我測試">
+          <figcaption>越獄指令、角色扮演、假造系統指令注入 API key，全數擋下</figcaption>
+        </figure>
+        <figure class="chart-fig">
+          <img src="venombot/limit-defense.jpg" alt="超過上限的防呆機制">
+          <figcaption>過長 PDF、影片、語音都被擋在呼叫 Gemini 之前</figcaption>
+        </figure>
+      </div>
+
+      <div class="section-label">Technical Stack</div>
+      <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Gemini API（google-genai SDK）</span>
+        <span class="tag">LINE Messaging API</span>
+        <span class="tag">Render</span>
+        <span class="tag">UptimeRobot</span>
+        <span class="tag">pypdf</span>
+        <span class="tag">Structured Output (response_schema)</span>
+      </div>
+
+      <p style="margin-top: 18px;"><a href="index.html">返回主頁</a></p>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <script>
+    const menuWrap = document.querySelector('.menu-wrap');
+    const menuBtn = document.querySelector('.menu-btn');
+    menuBtn.addEventListener('click', function(e) {
+      menuWrap.classList.toggle('open');
+      e.stopPropagation();
+    });
+    document.addEventListener('click', function() {
+      menuWrap.classList.remove('open');
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    document.querySelectorAll('figure.chart-fig img, .overview-photo img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+    }
+
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+</body>
+</html>

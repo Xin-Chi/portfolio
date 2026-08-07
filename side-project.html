@@ -454,6 +454,11 @@
       border-top: 1px solid rgba(138, 90, 47, 0.14);
     }
 
+    /* ── Architecture diagram figure ── */
+    .diagram-figure { margin: 14px 0 4px; text-align: center; }
+    .diagram-figure svg { max-width: 100%; height: auto; color: var(--text); }
+    .diagram-figure figcaption { margin-top: 6px; font-size: 0.9em; color: var(--muted); }
+
     /* ── Flowchart (兩欄文字流程) ── */
     .flow-grid {
       display: grid;
@@ -583,10 +588,11 @@
     </div>
     <nav class="menu-list">
       <div class="menu-title">專案分頁</div>
-      <a class="menu-link" href="thesis.html">1. 碩論</a>
-      <a class="menu-link" href="capstone.html">2. 專題</a>
-      <a class="menu-link" href="side-project.html">3. AI Side Project (RAG)</a>
-      <a class="menu-link" href="https://xin-chi.github.io/ai-news-pipeline/" target="_blank" rel="noopener">4. 每日 AI 快報</a>
+      <a class="menu-link" href="thesis.html">碩論</a>
+      <a class="menu-link" href="capstone.html">專題</a>
+      <a class="menu-link" href="side-project.html">醫療文章RAG檢索(AI RAG)</a>
+      <a class="menu-link" href="https://xin-chi.github.io/ai-news-pipeline/" target="_blank" rel="noopener">每日 AI 快報</a>
+      <a class="menu-link" href="venom-bot.html">Venom-Bot (AI Chatbot)</a>
     </nav>
   </div>
 
@@ -611,6 +617,57 @@
         內容涵蓋<span class="hl">透過實驗選定最佳 Embedding 模型與參數組合</span>、<span class="hl">FAISS</span> 向量檢索、到 <span class="hl">RAGAS</span> 量化評估，每個技術決策都有數據支撐。
         確保系統回答有依據、可追溯。
       </p>
+
+      <figure class="diagram-figure">
+        <svg viewBox="0 0 880 300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif" role="img" aria-label="RAG 系統資料流：使用者提問後，自建的 Colab 後端用 BGE-M3 將問題向量化並向 FAISS 向量庫檢索前五筆相關段落，組合成 Context 與 Prompt 送給 GPT-4.1 生成回答，再原路徑把含來源引用的答案送回使用者；背景另有 RAGAS 離線評估流程，用 gpt-4.1-mini 當裁判為回答品質打分，不屬於即時問答路徑。">
+          <defs>
+            <marker id="rag-arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
+            </marker>
+          </defs>
+
+          <text x="197" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">提問</text>
+          <text x="197" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">語意搜尋 或 Source ID</text>
+          <text x="577" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">Prompt</text>
+          <text x="577" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Context ＋ 引導詞</text>
+
+          <line x1="160" y1="80" x2="230" y2="80" stroke="currentColor" stroke-width="1.6" marker-end="url(#rag-arrow)"></line>
+          <line x1="465" y1="80" x2="685" y2="80" stroke="currentColor" stroke-width="1.6" marker-end="url(#rag-arrow)"></line>
+
+          <line x1="230" y1="104" x2="160" y2="104" stroke="currentColor" stroke-width="1.3" opacity="0.7" marker-end="url(#rag-arrow)"></line>
+          <line x1="685" y1="104" x2="465" y2="104" stroke="currentColor" stroke-width="1.3" opacity="0.7" marker-end="url(#rag-arrow)"></line>
+
+          <text x="197" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">回答</text>
+          <text x="577" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">生成結果</text>
+
+          <rect x="10" y="60" width="150" height="60" rx="8" fill="#faf1e2" stroke="currentColor" stroke-width="1.4"></rect>
+          <text x="85" y="87" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">使用者</text>
+          <text x="85" y="103" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">語意搜尋／Source ID</text>
+
+          <rect x="235" y="60" width="230" height="60" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.4"></rect>
+          <text x="350" y="87" text-anchor="middle" font-size="14" font-weight="800" fill="#fdf5e8">Colab 後端</text>
+          <text x="350" y="103" text-anchor="middle" font-size="10" fill="#fdf5e8" opacity="0.92">BGE-M3・自行開發</text>
+
+          <rect x="690" y="60" width="170" height="60" rx="8" fill="#faf1e2" stroke="currentColor" stroke-width="1.4"></rect>
+          <text x="775" y="87" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">GPT-4.1</text>
+          <text x="775" y="103" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">生成回答＋引用</text>
+
+          <rect x="180" y="210" width="190" height="56" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.85"></rect>
+          <text x="275" y="235" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.85">FAISS 向量庫</text>
+          <text x="275" y="250" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">50K chunks・BGE-M3</text>
+
+          <rect x="470" y="210" width="210" height="56" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.85"></rect>
+          <text x="575" y="235" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.85">RAGAS 評估</text>
+          <text x="575" y="250" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">gpt-4.1-mini・離線評分</text>
+
+          <line x1="300" y1="210" x2="320" y2="121" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6" marker-end="url(#rag-arrow)"></line>
+          <text x="245" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">向量檢索 Top-5</text>
+
+          <line x1="775" y1="121" x2="600" y2="209" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6" marker-end="url(#rag-arrow)"></line>
+          <text x="700" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">離線評估回答品質</text>
+        </svg>
+        <figcaption>圖 1 — RAG 系統資料流。FAISS 為離線建好的向量庫，RAGAS 為離線評估流程，兩者皆不在即時問答路徑上。</figcaption>
+      </figure>
 
       <!-- 實驗流程 -->
       <div class="section-label">實驗流程與選擇依據</div>
