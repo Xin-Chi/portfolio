@@ -280,6 +280,26 @@
       border: 0;
     }
 
+    .demo-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #fdf5e8;
+      font-weight: 800;
+      padding: 8px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      border-bottom: none;
+      white-space: nowrap;
+      box-shadow: 0 6px 14px rgba(138, 90, 47, 0.25);
+    }
+
+    .demo-btn:hover {
+      text-decoration: none;
+      opacity: 0.9;
+    }
+
     .highlight-item {
       border-left: 3px solid var(--accent);
       padding: 8px 14px;
@@ -373,6 +393,10 @@
         <li>開發 <span class="hl">Web</span> 收案系統，AI 採<span class="hl">建議模式</span>，最終由護理師 double check</li>
         <li>用 <span class="hl">Power BI</span> 建立全院感染儀表板</li>
       </ul>
+
+      <p style="margin: 14px 0;">
+        <a class="demo-btn" href="https://kingvenom.pythonanywhere.com/infection/search/" target="_blank" rel="noopener noreferrer">網頁 Demo 版 →</a>
+      </p>
 
       <div class="highlight-item">
         <div class="hi-title">資料建模：從「事件導向」重構為「患者導向」</div>
