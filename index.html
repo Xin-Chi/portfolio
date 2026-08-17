@@ -203,22 +203,34 @@
       box-sizing: border-box;
     }
 
+    .edu-entry {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .edu-school {
+      font-weight: 950;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+    }
+
     .edu-year {
       color: var(--muted);
       font-weight: 900;
       letter-spacing: 0.01em;
       font-size: 0.98em;
-    }
-
-    .edu-school {
-      font-weight: 950;
-      margin-top: 6px;
+      text-align: right;
+      flex-shrink: 0;
     }
 
     .edu-major {
       color: #0b1220;
       margin-top: 4px;
       font-weight: 650;
+      text-align: left;
     }
 
     .hint {
@@ -238,7 +250,8 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      justify-content: center;
+      justify-content: flex-start;
+      text-align: left;
     }
 
     .chip {
@@ -250,7 +263,7 @@
       border: 1px solid rgba(138, 90, 47, 0.3);
       background: rgba(138, 90, 47, 0.09);
       font-weight: 850;
-      font-size: 0.93em;
+      font-size: 0.85em;
       color: #332317;
       user-select: none;
     }
@@ -402,6 +415,7 @@
       <a class="menu-link" href="side-project.html">醫療文章RAG檢索(AI RAG)</a>
       <a class="menu-link" href="https://xin-chi.github.io/ai-news-pipeline/" target="_blank" rel="noopener">每日 AI 快報</a>
       <a class="menu-link" href="venom-bot.html">Venom-Bot (AI Chatbot)</a>
+      <a class="menu-link" href="personal.html" style="color: #1a3a6b;">課外的我</a>
     </nav>
   </div>
 
@@ -417,24 +431,29 @@
           <div class="card-title">基本資料</div>
           <div class="basic-list">
             <div style="margin-top: 6px; font-size: 0.9em; font-weight: 900; color: #c0392b; letter-spacing: 0.04em;">🔍 尋求正職機會</div>
-            <div class="basic-item"><strong>鍾昕起 (Hsin - Chi Chung)</strong>
-              <div class="basic-item"><strong>役畢，積極求職中</strong>
-              
-            <div class="basic-item"><strong>Email:</strong> <a href="mailto:your-email@example.com">lexlex4545@gmail.com</a></div>
+            <div class="basic-item"><strong>鍾昕起 (Hsin - Chi Chung)</strong></div>
+            <div class="basic-item"><strong>役畢，積極求職中</strong></div>
             <div class="basic-item"><strong>電話:</strong> 0909-910-327</div>
+            <div class="basic-item"><strong>Email:</strong> <a href="mailto:lexlex4545@gmail.com">lexlex4545@gmail.com</a></div>
+            <div class="basic-item"><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/xin-chi-chung-110383310/" target="_blank" rel="noopener">xin-chi-chung-110383310</a></div>
+            <div class="basic-item"><strong>GitHub:</strong> <a href="https://github.com/Xin-Chi" target="_blank" rel="noopener">Xin-Chi</a></div>
             <div class="basic-item"><strong>居住地:</strong> 台北市, 文山區</div>
             <div class="basic-item"><strong>學歷:</strong></div>
           </div>
           <div class="edu-list" style="margin-top: 10px;">
             <div class="edu-entry">
-              <div class="edu-year">2023/9 ~ 2025/8</div>
-              <div class="edu-school">國立中央大學（最高學歷）</div>
+              <div class="edu-school">
+                <span>國立中央大學（最高學歷）</span>
+                <div class="edu-year">2023/9 ~ 2025/8</div>
+              </div>
               <div class="edu-major">生醫科學與工程學系 碩士畢業</div>
             </div>
 
             <div class="edu-entry">
-              <div class="edu-year">2019/9 ~ 2023/6</div>
-              <div class="edu-school">中山醫學大學</div>
+              <div class="edu-school">
+                <span>中山醫學大學</span>
+                <div class="edu-year">2019/9 ~ 2023/6</div>
+              </div>
               <div class="edu-major">醫學資訊學系 大學畢業</div>
             </div>
           </div>
@@ -444,68 +463,70 @@
           <div class="card-title">專長</div>
 
           <div class="skill-group">
-            <div class="skill-label">Programming Languages</div>
-            <div class="chip-row" aria-label="Programming Languages">
+            <div class="skill-label">程式語言</div>
+            <div class="chip-row" aria-label="程式語言">
               <span class="chip"><span class="dot" aria-hidden="true"></span>Python</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span>C</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span>MATLAB</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>C / C++</span>
             </div>
           </div>
 
           <div class="skill-group">
-            <div class="skill-label">Frameworks &amp; Libraries</div>
-            <div class="chip-row" aria-label="Frameworks & Libraries">
-              <span class="chip"><span class="dot" aria-hidden="true"></span>Pandas</span>
+            <div class="skill-label">AI / LLM</div>
+            <div class="chip-row" aria-label="AI / LLM">
+              <span class="chip"><span class="dot" aria-hidden="true"></span>Machine Learning</span>
               <span class="chip"><span class="dot" aria-hidden="true"></span>PyTorch</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span>Django</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span>Scikit-learn</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>TensorFlow</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>RAG</span>
               <span class="chip"><span class="dot" aria-hidden="true"></span>LangChain</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>Prompt Engineering</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>Scikit-learn</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>LLM API</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>RAGAS</span>
             </div>
           </div>
 
           <div class="skill-group">
-            <div class="skill-label">Databases</div>
-            <div class="chip-row" aria-label="Databases">
-              <span class="chip"><span class="dot" aria-hidden="true"></span>Microsoft SQL Server (MSSQL)</span>
+            <div class="skill-label">NLP</div>
+            <div class="chip-row" aria-label="NLP">
+              <span class="chip"><span class="dot" aria-hidden="true"></span>spaCy</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>NLTK</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>MetaMap</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>NegEx</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>N-gram</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>NER</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-label">後端框架</div>
+            <div class="chip-row" aria-label="後端框架">
+              <span class="chip"><span class="dot" aria-hidden="true"></span>Django</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>FastAPI</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-label">資料庫 / 向量庫</div>
+            <div class="chip-row" aria-label="資料庫 / 向量庫">
+              <span class="chip"><span class="dot" aria-hidden="true"></span>MSSQL</span>
               <span class="chip"><span class="dot" aria-hidden="true"></span>MySQL</span>
               <span class="chip"><span class="dot" aria-hidden="true"></span>FAISS</span>
             </div>
           </div>
 
           <div class="skill-group">
-            <div class="skill-label">AI / Machine Learning</div>
-            <div class="chip-row" aria-label="AI / Machine Learning">
-              <span class="chip"><span class="dot" aria-hidden="true"></span>NLP</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span>NER</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span>RAG</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span>Prompt Engineering</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span>LLM API Integration</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span>Classification Models</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span>ANN</span>
+            <div class="skill-label">部署</div>
+            <div class="chip-row" aria-label="部署">
+              <span class="chip"><span class="dot" aria-hidden="true"></span>Render + UptimeRobot</span>
+              <span class="chip"><span class="dot" aria-hidden="true"></span>GitHub Actions</span>
             </div>
           </div>
 
           <div class="skill-group">
-            <div class="skill-label">NLP Tools</div>
-            <div class="chip-row" aria-label="NLP Tools">
-              <span class="chip"><span class="dot" aria-hidden="true"></span>NLTK</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span>spaCy</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span>N-gram</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span>MetaMap</span>
-              <span class="chip"><span class="dot" aria-hidden="true"></span>NegEx</span>
-            </div>
-          </div>
-
-          <div class="skill-group">
-            <div class="skill-label">Visualization</div>
-            <div class="chip-row" aria-label="Visualization">
+            <div class="skill-label">開發工具</div>
+            <div class="chip-row" aria-label="開發工具">
+              <span class="chip"><span class="dot" aria-hidden="true"></span>Git</span>
               <span class="chip"><span class="dot" aria-hidden="true"></span>Power BI</span>
-            </div>
-          </div>
-
-          <div class="skill-group">
-            <div class="skill-label">AI Agent Tools</div>
-            <div class="chip-row" aria-label="AI Agent Tools">
               <span class="chip"><span class="dot" aria-hidden="true"></span>Cursor</span>
               <span class="chip"><span class="dot" aria-hidden="true"></span>Claude Code</span>
             </div>
@@ -515,20 +536,11 @@
         <div class="card">
           <div class="card-title">自傳</div>
           <div class="bio-text">
-              研究所畢業於中央大學( National Central University, NCU)生醫科學與工程研究所，
-              研究方向聚焦於<b>自然語言處理與機器學習</b>在醫療資料中的應用。
-              <br>碩士研究以急診室臨床資料為基礎，處理包含生命徵象與大量中英混合自由文本的醫療紀錄，
-              透過<b>資料清理、特徵工程與 NLP 技術</b>將非結構化文本轉換為可分析的特徵，
-              並建立機器學習模型進行臨床結果預測。
-              過程中累積了大規模資料處理、資料分析以及 AI 模型應用的實務經驗，
-              也培養了從資料理解、模型建立到結果分析的完整研究能力。
-              <br><br>
-              大學畢業於中山醫學大學( Chung Shan Medical University, CSMU)醫學資訊學系，
-              在學期間培養了醫療資訊與程式設計的基礎能力，
-              包含<b>資料處理、資料庫管理與系統開發</b>。
-              大學期間曾於<b>醫院 AI 中心擔任研究助理</b>，參與臨床資料處理、系統開發以及NLP開發相關工作，
-              負責醫療文本資料整理、<b>N-gram</b> 分析與資料清理，並使用 <b>Django framework</b> 協助建置臨床人員使用的資訊系統。
-              透過實務專案，我逐步累積了處理醫療資料與開發系統的經驗，也培養了將資訊技術應用於醫療場域的能力。
+              　　我是鍾昕起，畢業於國立中央大學生醫資工學系。碩士期間，我專注於<b>NLP</b>與<b>機器學習</b>：在碩士論文中處理810,000+筆真實急診資料，透過特徵工程與模型優化，將預測<b>AUC提升9.6%</b>，累積了紮實的資料工程與統計建模能力。
+              <br>
+              　　畢業後，我自主投入LLM與生成式AI的實作：以<b>RAG</b>架構打造急診病歷檢索問答系統，並以RAGAS量化驗證，達到<b>Context Recall 0.89</b>的成果；也獨立完成<b>LINE × Gemini</b>聊天機器人的端到端開發與上線維運，從架構設計、API整合到零成本部署的可靠性工程。
+              <br>
+              　　大學期間我在<b>AI中心實習</b>擔任研究助理近2年，主導開發的院內感染監測系統，並且有實際在醫院上線給醫護人員使用，讓<b>人工監測量降低97%</b>，並拿下<b>大學專題競賽第一名</b>、入選首爾國際研討會科展參展。目前我正積極尋找正職的機會，希望持續把研究嚴謹度與工程實作結合，做出真正被使用的產品。
           </div>
         </div>
 
@@ -544,8 +556,8 @@
                 <li>使用<b> NLP</b> 技術分析醫療非結構化文本並建立文字特徵。</li>
                 <li>建置與維護 <b>MSSQL </b>資料庫，負責資料表設計、SQL 語法撰寫與資料清洗，支援 AI 模型與系統後端需求。</li>
                 <li>以<b> Django </b>架構開發內部互動式 Web 系統（Python / HTML），整合前後端與資料庫，提供護理與研究人員使用。</li>
-                <li>將臨床規則轉換為 <b>Rule-based AI </b>邏輯，應用於自動化案例蒐集與判斷。</li>
-                <li>負責跨部門會議技術簡報與成果展示，清楚說明系統設計與研究進度。</li>
+                <li>將臨床規則轉換為 <b>Rule-based AI </b>邏輯，應用於案例蒐集與判斷。</li>
+                <li>負責跨部門會議技術簡報與成果展示，說明系統設計與研究進度。</li>
                 <li>設計管理用儀表板，使用<b> Power BI </b>將複雜醫療資料視覺化。</li>
               </ul>
             </div>
@@ -562,9 +574,11 @@
             <a href="venom-bot.html">Venom-Bot (AI Chatbot)</a>
           </div>
         </div>
-      </div>
 
-      <div class="hint">鍾昕起</div>
+        <div class="card" style="text-align: left;">
+          <a href="personal.html">🌿 課外的我</a>
+        </div>
+      </div>
     </div>
   </div>
   <script>

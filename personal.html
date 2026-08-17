@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>課外的我</title>
+  <style>
+    :root {
+      --bg: #efe3cf;
+      --card: rgba(250, 241, 226, 0.92);
+      --text: #2f2218;
+      --muted: #6f5844;
+      --accent: #8a5a2f;
+      --border: rgba(80, 56, 35, 0.28);
+    }
+
+    body {
+      font-family: Georgia, 'Times New Roman', 'Noto Serif TC', 'PMingLiU', serif;
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(1200px circle at 10% 0%, rgba(138, 90, 47, 0.14), transparent 52%),
+        radial-gradient(900px circle at 100% 15%, rgba(164, 116, 75, 0.14), transparent 50%),
+        repeating-linear-gradient(
+          0deg,
+          rgba(110, 82, 58, 0.028) 0px,
+          rgba(110, 82, 58, 0.028) 1px,
+          transparent 1px,
+          transparent 3px
+        ),
+        var(--bg);
+      padding: 0;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 20px auto;
+      padding: 26px 18px;
+      text-align: center;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 16px 42px rgba(64, 43, 28, 0.18);
+      padding: 26px 18px;
+      position: relative;
+    }
+
+    .menu-wrap {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 20;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .menu-btn {
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(250, 241, 226, 0.95);
+      box-shadow: 0 8px 20px rgba(66, 45, 28, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #4b3423;
+      margin: 2px 0;
+      border-radius: 2px;
+    }
+
+    .menu-list {
+      margin-left: 10px;
+      min-width: 190px;
+      background: rgba(250, 241, 226, 0.97);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 12px 24px rgba(66, 45, 28, 0.16);
+      padding: 10px 12px;
+      text-align: left;
+      opacity: 0;
+      transform: translateX(-8px);
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .menu-wrap:hover .menu-list,
+    .menu-wrap:focus-within .menu-list,
+    .menu-wrap.open .menu-list {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .menu-title {
+      font-weight: 900;
+      color: #4a3321;
+      margin-bottom: 7px;
+      border-bottom: 1px solid rgba(111, 88, 68, 0.28);
+      padding-bottom: 6px;
+    }
+
+    .menu-link {
+      display: block;
+      color: #3d2a1b;
+      text-decoration: none;
+      border-bottom: none;
+      padding: 6px 2px;
+      font-weight: 700;
+    }
+
+    .menu-link:hover {
+      text-decoration: underline;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border: 1px dashed rgba(111, 88, 68, 0.28);
+      border-radius: 7px;
+      pointer-events: none;
+    }
+
+    .page-title {
+      font-size: 2em;
+      font-weight: 950;
+      color: #3f2a1b;
+      margin: 0 0 26px 0;
+      text-align: left;
+      border-bottom: 2px solid rgba(111, 88, 68, 0.32);
+      padding-bottom: 14px;
+    }
+
+    .card {
+      width: 100%;
+      background: rgba(255, 249, 238, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-sizing: border-box;
+      word-break: break-word;
+      box-shadow: 0 7px 20px rgba(66, 45, 28, 0.08);
+      margin-bottom: 14px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .card::before,
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 72px;
+      height: 72px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: 0.65;
+      pointer-events: none;
+      z-index: 1;
+      animation: sway 5s ease-in-out infinite;
+    }
+
+    /* leaf sprig */
+    .card::before {
+      top: -28px;
+      left: -22px;
+      transform-origin: bottom right;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%238a5a2f' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M50 90 C 45 60, 55 40, 50 10'/%3E%3Cpath d='M50 70 C 35 65, 25 50, 20 35' fill='%237c9464' stroke='%236f8556'/%3E%3Cpath d='M50 50 C 65 45, 75 30, 78 18' fill='%237c9464' stroke='%236f8556'/%3E%3Cpath d='M50 30 C 38 27, 30 18, 26 10' fill='%237c9464' stroke='%236f8556'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* falling leaf */
+    .card::after {
+      content: "";
+      bottom: -24px;
+      right: -18px;
+      width: 54px;
+      height: 54px;
+      transform-origin: top left;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 12 C 80 20, 90 50, 50 90 C 10 50, 20 20, 50 12 Z' fill='%23b98a4e' stroke='%238a5a2f' stroke-width='3'/%3E%3Cpath d='M50 18 L50 84' stroke='%238a5a2f' stroke-width='2'/%3E%3C/svg%3E");
+      animation-delay: 0.6s;
+    }
+
+    /* flower sprig for social/family card */
+    .card:nth-of-type(3)::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg%3E%3Cpath d='M50 95 C 47 65, 53 45, 50 20' fill='none' stroke='%238a5a2f' stroke-width='3' stroke-linecap='round'/%3E%3Cg transform='translate(50,20)'%3E%3Ccircle r='6' fill='%23d98c6a'/%3E%3Cellipse cx='0' cy='-13' rx='6' ry='9' fill='%23e7a487'/%3E%3Cellipse cx='0' cy='13' rx='6' ry='9' fill='%23e7a487'/%3E%3Cellipse cx='-13' cy='0' rx='9' ry='6' fill='%23e7a487'/%3E%3Cellipse cx='13' cy='0' rx='9' ry='6' fill='%23e7a487'/%3E%3C/g%3E%3Cpath d='M50 60 C 35 57, 28 48, 24 40' fill='%237c9464' stroke='%236f8556' stroke-width='2'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .card:nth-of-type(3)::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg transform='rotate(15 50 50)'%3E%3Ccircle r='6' cy='30' cx='50' fill='%23e7a487'/%3E%3Cellipse cx='50' cy='17' rx='6' ry='9' fill='%23f0bfa8'/%3E%3Cellipse cx='50' cy='43' rx='6' ry='9' fill='%23f0bfa8'/%3E%3Cellipse cx='37' cy='30' rx='9' ry='6' fill='%23f0bfa8'/%3E%3Cellipse cx='63' cy='30' rx='9' ry='6' fill='%23f0bfa8'/%3E%3Cpath d='M50 40 L50 85' stroke='%238a5a2f' stroke-width='3' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* travel/plane card: simple cloud sprig */
+    .card:nth-of-type(4)::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%238a5a2f' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M50 90 C 45 60, 55 40, 50 10'/%3E%3Cpath d='M50 68 C 33 63, 24 50, 20 38' fill='%237c9464' stroke='%236f8556'/%3E%3Cpath d='M50 44 C 66 40, 74 28, 78 18' fill='%237c9464' stroke='%236f8556'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .card:nth-of-type(4)::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 12 C 80 20, 90 50, 50 90 C 10 50, 20 20, 50 12 Z' fill='%237c9464' stroke='%236f8556' stroke-width='3'/%3E%3Cpath d='M50 18 L50 84' stroke='%236f8556' stroke-width='2'/%3E%3C/svg%3E");
+    }
+
+    @keyframes sway {
+      0%, 100% { transform: rotate(-6deg); }
+      50% { transform: rotate(6deg); }
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 2px solid rgba(111, 88, 68, 0.32);
+      padding-bottom: 14px;
+      margin-bottom: 26px;
+    }
+
+    .dog-mascot {
+      width: 64px;
+      height: 64px;
+      flex-shrink: 0;
+    }
+
+    .dog-mascot .tail {
+      transform-origin: 78px 68px;
+      animation: wag 0.5s ease-in-out infinite;
+    }
+
+    @keyframes wag {
+      0%, 100% { transform: rotate(-14deg); }
+      50% { transform: rotate(14deg); }
+    }
+
+    @media (max-width: 620px) {
+      .dog-mascot {
+        width: 48px;
+        height: 48px;
+      }
+    }
+
+    .content {
+      font-size: 1.05em;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      border-bottom: 1px dotted rgba(138, 90, 47, 0.45);
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .section-title {
+      font-weight: 950;
+      letter-spacing: 0.01em;
+      margin-bottom: 10px;
+      text-align: left;
+      color: #3f2a1b;
+      border-bottom: 1px dashed rgba(111, 88, 68, 0.4);
+      padding-bottom: 7px;
+      margin-top: 20px;
+      transform: rotate(-0.4deg);
+      font-size: 1.1em;
+    }
+
+    .section-title:first-of-type {
+      margin-top: 0;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        margin: 14px 14px;
+      }
+
+      .panel {
+        padding: 22px 14px;
+      }
+
+      .page-title {
+        font-size: 1.6em;
+      }
+
+      .menu-wrap {
+        top: 10px;
+        left: 10px;
+      }
+
+      .menu-list {
+        min-width: 170px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-wrap" aria-label="Project Navigation">
+    <div class="menu-btn" aria-hidden="true">
+      <div>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <nav class="menu-list">
+      <div class="menu-title">專案分頁</div>
+      <a class="menu-link" href="index.html">主頁</a>
+      <a class="menu-link" href="thesis.html">碩論</a>
+      <a class="menu-link" href="capstone.html">專題</a>
+      <a class="menu-link" href="side-project.html">醫療文章RAG檢索(AI RAG)</a>
+      <a class="menu-link" href="https://xin-chi.github.io/ai-news-pipeline/" target="_blank" rel="noopener">每日 AI 快報</a>
+      <a class="menu-link" href="venom-bot.html">Venom-Bot (AI Chatbot)</a>
+      <a class="menu-link" href="personal.html" style="color: #1a3a6b;">課外的我</a>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div class="panel">
+      <div class="title-row">
+        <div class="page-title" style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;">課外的我</div>
+        <svg class="dog-mascot" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#b98a4e" stroke="#8a5a2f" stroke-width="2.5" stroke-linejoin="round">
+            <!-- tail, wagging to the side, drawn first so body overlaps its base -->
+            <path class="tail" d="M78 68 C 92 66, 96 56, 90 48" fill="none" stroke-width="6" stroke-linecap="round"/>
+            <!-- body sitting -->
+            <ellipse cx="50" cy="72" rx="26" ry="20"/>
+            <!-- front paws -->
+            <ellipse cx="38" cy="90" rx="7" ry="6" fill="#e7cba0"/>
+            <ellipse cx="62" cy="90" rx="7" ry="6" fill="#e7cba0"/>
+            <!-- head -->
+            <circle cx="50" cy="38" r="22"/>
+            <!-- ears -->
+            <path d="M32 24 C 24 10, 18 20, 24 34 Z"/>
+            <path d="M68 24 C 76 10, 82 20, 76 34 Z"/>
+            <!-- snout -->
+            <ellipse cx="50" cy="44" rx="10" ry="7" fill="#e7cba0"/>
+          </g>
+          <!-- eyes -->
+          <circle cx="42" cy="34" r="2.4" fill="#2f2218"/>
+          <circle cx="58" cy="34" r="2.4" fill="#2f2218"/>
+          <!-- nose -->
+          <ellipse cx="50" cy="41" rx="2.6" ry="2" fill="#2f2218"/>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="section-title">🎉 系學會 · 活動長</div>
+        <div class="content">
+          擔任系上活動長，負責各項活動的發想與執行。從活動時間、人數、氛圍到活動目的，每一個細節都要考量，目的是增進系上的凝聚力。
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px;">
+          <img src="personal/image7.jpg" alt="系學會活動">
+          <img src="personal/image8.jpg" alt="系學會活動">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">🏀 系籃隊 · 隊長</div>
+        <div class="content">
+          擔任系籃隊隊長，帶領球隊參加校外盃賽連兩年季軍。不只是打球，更要引導隊友認真練習、在比賽中互相配合。籃球教會我的是團隊合作和領導。
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px;">
+          <img src="personal/image.jpg" alt="系籃隊">
+          <img src="personal/image3.jpg" alt="系籃隊">
+          <img src="personal/image6.jpg" alt="系籃隊">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">🌅 家庭 · 回憶</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: center;">
+          <img src="personal/image2.jpg" alt="阿里山夕陽" style="border-radius: 8px;">
+          <div class="content" style="margin: 0;">
+            <b>阿里山夕陽</b>
+            <br><br>
+            跟家人去阿里山看夕陽，四五點起床去搭阿里山火車，那景象是人生一定要看過一次的。
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: center; margin-top: 18px;">
+          <img src="personal/image5.jpg" alt="拔柚子" style="border-radius: 8px;">
+          <div class="content" style="margin: 0;">
+            <b>回老家拔柚子</b>
+            <br><br>
+            阿公阿嬤年紀大了，柚子樹爬不動，每年就靠我們年輕人回去幫忙摘。摘柚子是藉口，其實是想找機會回老家看看他們、陪陪他們。
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">✈️ 日本 · 畢業旅行</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: center;">
+          <img src="personal/image4.jpg" alt="日本畢業旅行" style="border-radius: 8px;">
+          <div class="content" style="margin: 0;">
+            和碩班同學的畢業旅行，到了日本。有機會到國外走走，放鬆身心、減輕壓力。這段時光彌足珍貴。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
