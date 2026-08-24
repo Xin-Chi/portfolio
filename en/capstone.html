@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>專題專案</title>
+  <title>Capstone Project</title>
   <style>
     :root {
       --bg: #efe3cf;
@@ -205,7 +205,7 @@
 
     .project-img {
       width: 100%;
-      height: auto; /* 保持等比例縮放 */
+      height: auto; /* keep aspect ratio */
       display: block;
       border-radius: 10px;
       border: 1px solid rgba(80, 56, 35, 0.20);
@@ -214,7 +214,7 @@
     }
 
     .project-img-compact {
-      width: 30%; /* HAIDefinitions 稍小 */
+      width: 30%; /* HAIDefinitions slightly smaller */
       margin: 0 auto;
       height: auto;
       display: block;
@@ -394,8 +394,8 @@
 </head>
 <body>
   <div class="lang-switch" aria-label="Language">
-    <a href="capstone.html" class="active">中文</a>
-    <a href="en/capstone.html">EN</a>
+    <a href="../capstone.html">中文</a>
+    <a href="capstone.html" class="active">EN</a>
   </div>
 
   <div class="menu-wrap" aria-label="Project Navigation">
@@ -407,18 +407,18 @@
       </div>
     </div>
     <nav class="menu-list">
-      <div class="menu-title">專案分頁</div>
-      <a class="menu-link" href="index.html">主頁</a>
-      <a class="menu-link" href="thesis.html">碩論</a>
-      <a class="menu-link" href="capstone.html">專題</a>
-      <a class="menu-link" href="side-project.html">醫療文章RAG檢索(AI RAG)</a>
-      <a class="menu-link" href="https://xin-chi.github.io/ai-news-pipeline/" target="_blank" rel="noopener">每日 AI 快報</a>
+      <div class="menu-title">Pages</div>
+      <a class="menu-link" href="index.html">Home</a>
+      <a class="menu-link" href="thesis.html">Master's Thesis</a>
+      <a class="menu-link" href="capstone.html">Capstone Project</a>
+      <a class="menu-link" href="side-project.html">Medical RAG Retrieval (AI RAG)</a>
+      <a class="menu-link" href="https://xin-chi.github.io/ai-news-pipeline/" target="_blank" rel="noopener">Daily AI Digest</a>
       <a class="menu-link" href="venom-bot.html">Venom-Bot (AI Chatbot)</a>
-      <a class="menu-link" href="personal.html" style="color: #1a3a6b;">課外的我</a>
+      <a class="menu-link" href="personal.html" style="color: #1a3a6b;">Life Outside the Lab</a>
     </nav>
   </div>
 
-  <a class="home-btn" href="index.html" aria-label="返回主頁" title="返回主頁">
+  <a class="home-btn" href="index.html" aria-label="Back to home" title="Back to home">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 3l9 8h-3v10h-4V14H10v7H6V11H3l9-8z"></path>
     </svg>
@@ -426,80 +426,80 @@
   <div class="container">
     <div class="card">
       <h1>
-        專題：
+        Capstone:
         <span class="hl">Artificial Intelligence–Based</span>
         <span class="hl">Healthcare-Associated Bloodstream Infection</span>
         <span class="hl">Surveillance and Classification System</span>
       </h1>
 
-      <div class="time-right">時間：2021/9 ~ 2023/2</div>
+      <div class="time-right">Sep 2021 &ndash; Feb 2023</div>
 
       <div class="meta">
-        <span class="hl hl-red">校內專題競賽第一名</span>，並代表參加 <span class="hl">ISQua's 39th Poster Display</span> 國際發表；系統已<span class="hl">實際部署於感染科使用</span>
+        <span class="hl hl-red">First place in the university capstone competition</span>, presented internationally at <span class="hl">ISQua's 39th Poster Display</span>; the system is <span class="hl">deployed and in use by the infection control department</span>
       </div>
 
       <ul>
-        <li>與感染科護理師多次<span class="hl">需求訪談</span>，把臨床判斷標準轉換成系統規則</li>
-        <li>資料模型由<span class="hl">事件導向</span>重構為<span class="hl">患者導向</span>，建置 <span class="hl">MSSQL</span> 感染管控資料庫</li>
-        <li>用 <span class="hl">n-gram</span> 從護理紀錄、檢驗報告等非結構化文本摘錄關鍵資訊</li>
-        <li>建立 <span class="hl">Rule-based Decision Support System</span>，收案時間從 <span class="hl hl-red">2–3 週</span>縮短至 <span class="hl hl-red">1 天</span>，減少 <span class="hl hl-red">97%</span> 人工複查</li>
-        <li>開發 <span class="hl">Web</span> 收案系統，AI 採<span class="hl">建議模式</span>，最終由護理師 double check</li>
-        <li>用 <span class="hl">Power BI</span> 建立全院感染儀表板</li>
+        <li>Ran repeated <span class="hl">requirements interviews</span> with infection control nurses to turn clinical judgment criteria into system rules</li>
+        <li>Restructured the data model from <span class="hl">event-centric</span> to <span class="hl">patient-centric</span> and built the <span class="hl">MSSQL</span> infection control database</li>
+        <li>Used <span class="hl">n-grams</span> to extract key information from unstructured text such as nursing records and lab reports</li>
+        <li>Built a <span class="hl">rule-based decision support system</span> that cut case review from <span class="hl hl-red">2&ndash;3 weeks</span> to <span class="hl hl-red">1 day</span>, removing <span class="hl hl-red">97%</span> of manual re-checking</li>
+        <li>Developed the <span class="hl">web</span> case-collection system, with AI acting in an <span class="hl">advisory role</span> and a nurse making the final call</li>
+        <li>Built a hospital-wide infection dashboard with <span class="hl">Power BI</span></li>
       </ul>
 
       <p style="margin: 14px 0;">
-        <a class="demo-btn" href="https://kingvenom.pythonanywhere.com/infection/search/" target="_blank" rel="noopener noreferrer">網頁 Demo 版 →</a>
+        <a class="demo-btn" href="https://kingvenom.pythonanywhere.com/infection/search/" target="_blank" rel="noopener noreferrer">Live web demo &rarr;</a>
       </p>
 
       <div class="highlight-item">
-        <div class="hi-title">資料建模：從「事件導向」重構為「患者導向」</div>
-        <div class="hi-body">原始醫院資料依照檢驗、護理紀錄等不同醫療事件分別儲存，護理師得跨多個子系統才能拼湊出一位患者的完整資訊。重新設計成以患者為中心的資料模型後，只需搜尋患者即可取得所有相關醫療事件，大幅提升查詢與篩選效率。</div>
+        <div class="hi-title">Data Modeling: From Event-Centric to Patient-Centric</div>
+        <div class="hi-body">The hospital's original data was stored by medical event &mdash; labs in one place, nursing records in another &mdash; so a nurse had to move across several subsystems just to piece together one patient's picture. Redesigning around a patient-centric model meant a single patient lookup returns every related medical event, making search and filtering far faster.</div>
       </div>
 
       <div class="highlight-item">
-        <div class="hi-title">需求訪談：把臨床判斷標準轉換成系統規則</div>
-        <div class="hi-body">醫療端流程與資訊端邏輯存在落差，與感染科護理師進行多次訪談釐清實際判斷標準。例如「住院天數」這種看似單純的條件，也得確認資訊端該用日期相減、還是精確計算到小時，避免系統判斷結果與臨床認知產生落差。</div>
+        <div class="hi-title">Requirements Interviews: Turning Clinical Criteria into System Rules</div>
+        <div class="hi-body">Clinical workflow and system logic don't line up on their own, so I interviewed infection control nurses repeatedly to pin down what the criteria actually meant. Even something as simple-sounding as &ldquo;length of stay&rdquo; had to be settled: subtract the dates, or count it out to the hour? Getting that wrong is how a system's verdict drifts away from what clinicians expect.</div>
       </div>
 
-      <div class="section-label">圖示（Figures）</div>
+      <div class="section-label">Figures</div>
       <div class="img-grid" aria-label="Capstone Figures">
         <div class="img-item">
-          <img class="project-img-compact" src="capstone/HAIDefinitions.png" alt="HAI 定義規則">
-          <div class="img-caption">① HAIDefinitions：依據本書所定義的規則做後續收案</div>
+          <img class="project-img-compact" src="../capstone/HAIDefinitions.png" alt="HAI definition rules">
+          <div class="img-caption">① HAIDefinitions: case collection follows the rules defined in this handbook</div>
         </div>
 
         <div class="img-item">
-          <img class="project-img" src="capstone/restructure.png" alt="資料整合與清潔起始流程">
-          <div class="img-caption">② Restructure：將複雜 HIS 資料整合，重構為患者導向的資料模型</div>
+          <img class="project-img" src="../capstone/restructure.png" alt="Data integration and cleaning pipeline">
+          <div class="img-caption">② Restructure: consolidating complex HIS data into a patient-centric model</div>
         </div>
 
         <div class="img-item">
-          <img class="project-img" src="capstone/NursingRecordNER.png" alt="患者生理資訊摘錄與警示">
-          <div class="img-caption">③ NursingRecordNER：從護理紀錄摘錄生理資訊，加入警示符號與時間軸呈現</div>
+          <img class="project-img" src="../capstone/NursingRecordNER.png" alt="Patient vital sign extraction and alerts">
+          <div class="img-caption">③ NursingRecordNER: pulling vitals out of nursing records, with alert markers on a timeline</div>
         </div>
 
         <div class="img-item">
-          <img class="project-img" src="capstone/CenterWeb.png" alt="整合成網頁成果">
-          <div class="img-caption">④ CenterWeb：整合為單一網站，供護理師/醫師收案使用</div>
+          <img class="project-img" src="../capstone/CenterWeb.png" alt="Integrated web application">
+          <div class="img-caption">④ CenterWeb: everything in one site for nurses and physicians to work cases</div>
         </div>
 
         <div class="img-item">
-          <img class="project-img" src="capstone/powerbi.png" alt="Power BI 統計圖表">
-          <div class="img-caption">⑤ Dashboard：以 Power BI 製作全院感染統計圖表</div>
+          <img class="project-img" src="../capstone/powerbi.png" alt="Power BI statistical charts">
+          <div class="img-caption">⑤ Dashboard: hospital-wide infection statistics built in Power BI</div>
         </div>
       </div>
 
-      <div class="section-label">Poster（PDF）</div>
+      <div class="section-label">Poster (PDF)</div>
       <div class="pdf-wrap">
-        <iframe class="pdf-iframe" src="capstone/poster2023.pdf" title="poster2023.pdf"></iframe>
+        <iframe class="pdf-iframe" src="../capstone/poster2023.pdf" title="poster2023.pdf"></iframe>
       </div>
       <p style="margin-top: 10px;">
-        <a href="capstone/poster2023.pdf" target="_blank" rel="noopener noreferrer">點此下載/開啟 poster2023.pdf</a>
+        <a href="../capstone/poster2023.pdf" target="_blank" rel="noopener noreferrer">Download / open poster2023.pdf</a>
       </p>
 
       <div class="section-label">Technical Stack</div>
       <div class="tag-row">
-        <span class="tag">使用者需求訪談</span>
+        <span class="tag">User Requirements Interviews</span>
         <span class="tag">MSSQL Database</span>
         <span class="tag">N-gram</span>
         <span class="tag">Named Entity Recognition (NER)</span>
@@ -508,7 +508,7 @@
         <span class="tag">Rule-based Decision Support</span>
       </div>
 
-      <p style="margin-top: 14px;"><a href="index.html">返回主頁</a></p>
+      <p style="margin-top: 14px;"><a href="index.html">Back to home</a></p>
     </div>
   </div>
 

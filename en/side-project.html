@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Side Project - RAG System（升級版）</title>
+  <title>Medical RAG System</title>
   <style>
     :root {
       --bg: #efe3cf;
@@ -287,7 +287,7 @@
       line-height: 1.4;
     }
 
-    /* ── Highlight Cards (技術亮點) ── */
+    /* ── Highlight Cards (technical highlights) ── */
     .highlight-item {
       border-left: 3px solid var(--accent);
       padding: 8px 14px;
@@ -459,7 +459,7 @@
     .diagram-figure svg { max-width: 100%; height: auto; color: var(--text); }
     .diagram-figure figcaption { margin-top: 6px; font-size: 0.9em; color: var(--muted); }
 
-    /* ── Flowchart (兩欄文字流程) ── */
+    /* ── Flowchart (two-column text flow) ── */
     .flow-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -625,8 +625,8 @@
 </head>
 <body>
   <div class="lang-switch" aria-label="Language">
-    <a href="side-project.html" class="active">中文</a>
-    <a href="en/side-project.html">EN</a>
+    <a href="../side-project.html">中文</a>
+    <a href="side-project.html" class="active">EN</a>
   </div>
 
   <div class="menu-wrap" aria-label="Project Navigation">
@@ -638,18 +638,18 @@
       </div>
     </div>
     <nav class="menu-list">
-      <div class="menu-title">專案分頁</div>
-      <a class="menu-link" href="index.html">主頁</a>
-      <a class="menu-link" href="thesis.html">碩論</a>
-      <a class="menu-link" href="capstone.html">專題</a>
-      <a class="menu-link" href="side-project.html">醫療文章RAG檢索(AI RAG)</a>
-      <a class="menu-link" href="https://xin-chi.github.io/ai-news-pipeline/" target="_blank" rel="noopener">每日 AI 快報</a>
+      <div class="menu-title">Pages</div>
+      <a class="menu-link" href="index.html">Home</a>
+      <a class="menu-link" href="thesis.html">Master's Thesis</a>
+      <a class="menu-link" href="capstone.html">Capstone Project</a>
+      <a class="menu-link" href="side-project.html">Medical RAG Retrieval (AI RAG)</a>
+      <a class="menu-link" href="https://xin-chi.github.io/ai-news-pipeline/" target="_blank" rel="noopener">Daily AI Digest</a>
       <a class="menu-link" href="venom-bot.html">Venom-Bot (AI Chatbot)</a>
-      <a class="menu-link" href="personal.html" style="color: #1a3a6b;">課外的我</a>
+      <a class="menu-link" href="personal.html" style="color: #1a3a6b;">Life Outside the Lab</a>
     </nav>
   </div>
 
-  <a class="home-btn" href="index.html" aria-label="返回主頁" title="返回主頁">
+  <a class="home-btn" href="index.html" aria-label="Back to home" title="Back to home">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 3l9 8h-3v10h-4V14H10v7H6V11H3l9-8z"></path>
     </svg>
@@ -658,31 +658,31 @@
   <div class="container">
     <div class="card">
 
-      <h1>大型語言模型對急診病歷快速檢索並提供有據可查的問答 <br>
+      <h1>Fast, Source-Traceable Q&amp;A over Emergency Department Records with an LLM <br>
         LangChain-Based <span class="hl">Medical RAG System</span></h1>
-      <div class="time-right">Side Project｜2025.12–2026.2</div>
+      <div class="time-right">Side Project | Dec 2025 &ndash; Feb 2026</div>
 
-      <!-- 專案概述 -->
-      <div class="section-label">專案概述</div>
+      <!-- Project overview -->
+      <div class="section-label">Project Overview</div>
       <p>
-        針對急診病歷建構 <span class="hl">Retrieval-Augmented Generation（RAG）</span>問答專案，
-        用 AI 讓系統從急診紀錄裡找出答案，並標明來源。
-        內容涵蓋<span class="hl">透過實驗選定最佳 Embedding 模型與參數組合</span>、<span class="hl">FAISS</span> 向量檢索、到 <span class="hl">RAGAS</span> 量化評估，每個技術決策都有數據支撐。
-        確保系統回答有依據、可追溯。
+        A <span class="hl">retrieval-augmented generation (RAG)</span> question-answering project built over emergency department records:
+        the system finds answers inside the notes themselves and cites where each one came from.
+        <span class="hl">Controlled experiments</span> picked the embedding model and parameters. From there: <span class="hl">FAISS</span> vector retrieval, then quantitative evaluation with <span class="hl">RAGAS</span> &mdash; every technical decision backed by data.
+        The goal throughout: answers that are grounded and traceable.
       </p>
 
       <figure class="diagram-figure">
-        <svg viewBox="0 0 880 300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif" role="img" aria-label="RAG 系統資料流：使用者提問後，自建的 Colab 後端用 BGE-M3 將問題向量化並向 FAISS 向量庫檢索前五筆相關段落，組合成 Context 與 Prompt 送給 GPT-4.1 生成回答，再原路徑把含來源引用的答案送回使用者；背景另有 RAGAS 離線評估流程，用 gpt-4.1-mini 當裁判為回答品質打分，不屬於即時問答路徑。">
+        <svg viewBox="0 0 880 300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif" role="img" aria-label="RAG system data flow: a user asks a question; the Colab backend embeds it with BGE-M3, retrieves the top five relevant passages from the FAISS vector store, assembles them into context and a prompt for GPT-4.1, and returns the cited answer along the same path. Separately, an offline RAGAS evaluation pipeline uses gpt-4.1-mini as a judge to score answer quality; it is not part of the live question-answering path.">
           <defs>
             <marker id="rag-arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
               <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
             </marker>
           </defs>
 
-          <text x="197" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">提問</text>
-          <text x="197" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">語意搜尋 或 Source ID</text>
+          <text x="197" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">Question</text>
+          <text x="197" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Semantic search or Source ID</text>
           <text x="577" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">Prompt</text>
-          <text x="577" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Context ＋ 引導詞</text>
+          <text x="577" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Context + prompt</text>
 
           <line x1="160" y1="80" x2="230" y2="80" stroke="currentColor" stroke-width="1.6" marker-end="url(#rag-arrow)"></line>
           <line x1="465" y1="80" x2="685" y2="80" stroke="currentColor" stroke-width="1.6" marker-end="url(#rag-arrow)"></line>
@@ -690,288 +690,288 @@
           <line x1="230" y1="104" x2="160" y2="104" stroke="currentColor" stroke-width="1.3" opacity="0.7" marker-end="url(#rag-arrow)"></line>
           <line x1="685" y1="104" x2="465" y2="104" stroke="currentColor" stroke-width="1.3" opacity="0.7" marker-end="url(#rag-arrow)"></line>
 
-          <text x="197" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">回答</text>
-          <text x="577" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">生成結果</text>
+          <text x="197" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Answer</text>
+          <text x="577" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Generated output</text>
 
           <rect x="10" y="60" width="150" height="60" rx="8" fill="#faf1e2" stroke="currentColor" stroke-width="1.4"></rect>
-          <text x="85" y="87" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">使用者</text>
-          <text x="85" y="103" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">語意搜尋／Source ID</text>
+          <text x="85" y="87" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">User</text>
+          <text x="85" y="103" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Semantic search / Source ID</text>
 
           <rect x="235" y="60" width="230" height="60" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.4"></rect>
-          <text x="350" y="87" text-anchor="middle" font-size="14" font-weight="800" fill="#fdf5e8">Colab 後端</text>
-          <text x="350" y="103" text-anchor="middle" font-size="10" fill="#fdf5e8" opacity="0.92">BGE-M3・自行開發</text>
+          <text x="350" y="87" text-anchor="middle" font-size="14" font-weight="800" fill="#fdf5e8">Colab backend</text>
+          <text x="350" y="103" text-anchor="middle" font-size="10" fill="#fdf5e8" opacity="0.92">BGE-M3 embedding</text>
 
           <rect x="690" y="60" width="170" height="60" rx="8" fill="#faf1e2" stroke="currentColor" stroke-width="1.4"></rect>
           <text x="775" y="87" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">GPT-4.1</text>
-          <text x="775" y="103" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">生成回答＋引用</text>
+          <text x="775" y="103" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Answer + citations</text>
 
           <rect x="180" y="210" width="190" height="56" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.85"></rect>
-          <text x="275" y="235" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.85">FAISS 向量庫</text>
-          <text x="275" y="250" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">50K chunks・BGE-M3</text>
+          <text x="275" y="235" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.85">FAISS vector store</text>
+          <text x="275" y="250" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">50K chunks &middot; BGE-M3</text>
 
           <rect x="470" y="210" width="210" height="56" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.85"></rect>
-          <text x="575" y="235" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.85">RAGAS 評估</text>
-          <text x="575" y="250" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">gpt-4.1-mini・離線評分</text>
+          <text x="575" y="235" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.85">RAGAS evaluation</text>
+          <text x="575" y="250" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">gpt-4.1-mini &middot; offline scoring</text>
 
           <line x1="300" y1="210" x2="320" y2="121" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6" marker-end="url(#rag-arrow)"></line>
-          <text x="245" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">向量檢索 Top-5</text>
+          <text x="245" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">Top-5 vector retrieval</text>
 
           <line x1="775" y1="121" x2="600" y2="209" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6" marker-end="url(#rag-arrow)"></line>
-          <text x="700" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">離線評估回答品質</text>
+          <text x="700" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">Offline answer-quality scoring</text>
         </svg>
-        <figcaption>圖 1 — RAG 系統資料流。FAISS 為離線建好的向量庫，RAGAS 為離線評估流程，兩者皆不在即時問答路徑上。</figcaption>
+        <figcaption>Fig 1 &mdash; RAG system data flow. FAISS is a vector store built offline and RAGAS is an offline evaluation pipeline; neither sits on the live question-answering path.</figcaption>
       </figure>
 
-      <!-- 實驗流程 -->
-      <div class="section-label">實驗流程與選擇依據</div>
+      <!-- Experiment pipeline -->
+      <div class="section-label">Experiments and the Reasoning Behind Each Choice</div>
 
       <div class="exp-block">
         <div class="exp-header">
-          <span class="exp-num">①</span>資料規模實驗
+          <span class="exp-num">①</span>Dataset size experiment
         </div>
         <div class="exp-body">
-          比較 5K / 20K / 50K 三種規模的 retrieval 品質，觀察到 5K→20K 改善顯著，20K→50K 收斂，
-          選定 <strong>50,000 筆</strong>作為 cost-performance 平衡點。
+          Compared retrieval quality at 5K / 20K / 50K records. The jump from 5K to 20K improved things markedly, while 20K to 50K converged, so
+          <strong>50,000 records</strong> was chosen as the cost-performance balance point.
         </div>
       </div>
 
       <div class="exp-block">
         <div class="exp-header">
-          <span class="exp-num">②</span>文本長度分析(Chunk Size)
+          <span class="exp-num">②</span>Text length analysis (chunk size)
         </div>
         <div class="exp-body">
-          分析資料分布後發現平均長度僅 <strong>167 字</strong>、最長 <strong>464 字</strong>，69.3% 的文本在 100~200 字之間，
-          選定 <strong>chunk_size=200，overlap=20</strong>。
+          The distribution showed a mean length of only <strong>167 characters</strong> and a maximum of <strong>464</strong>, with 69.3% of texts falling between 100 and 200 characters &mdash; hence
+          <strong>chunk_size=200, overlap=20</strong>.
         </div>
       </div>
 
       <div class="exp-block">
         <div class="exp-header">
-          <span class="exp-num">③</span>Embedding 模型比較
+          <span class="exp-num">③</span>Embedding model comparison
         </div>
         <div class="exp-body">
-          在統一 Cosine Similarity 尺度下比較三個模型：
+          Three models compared on a single, consistent cosine similarity scale:
           <table class="data-table" style="margin-top:10px;">
             <thead>
               <tr>
-                <th>模型</th>
-                <th>Cosine Similarity（50K）</th>
-                <th>建庫時間</th>
+                <th>Model</th>
+                <th>Cosine similarity (50K)</th>
+                <th>Index build time</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>MiniLM</td>
                 <td>0.6870</td>
-                <td>102 秒</td>
+                <td>102 s</td>
               </tr>
               <tr>
                 <td>Text2Vec</td>
                 <td>0.6947</td>
-                <td>342 秒</td>
+                <td>342 s</td>
               </tr>
               <tr class="best">
                 <td>BAAI/bge-m3 ✓</td>
                 <td>0.7005</td>
-                <td>1056 秒</td>
+                <td>1056 s</td>
               </tr>
             </tbody>
           </table>
-          <p class="note">選定 <strong>BAAI/bge-m3</strong>，中英文混合醫療文本表現最佳。</p>
+          <p class="note">Chose <strong>BAAI/bge-m3</strong> &mdash; the strongest performer on mixed Chinese-English clinical text.</p>
           <div class="fig-grid">
             <figure class="chart-fig">
-              <img src="sideproject/embedding_model_comparison%20(5).png" alt="三模型綜合比較表">
-              <figcaption>綜合數據：三模型 × 三資料規模（Cosine + 建庫時間）</figcaption>
+              <img src="../sideproject/embedding_model_comparison%20(5).png" alt="Combined comparison of three models">
+              <figcaption>Combined results: three models &times; three dataset sizes (cosine + build time)</figcaption>
             </figure>
             <figure class="chart-fig">
-              <img src="sideproject/embedding_model_comparison%20(6).png" alt="Cosine Similarity 折線圖">
-              <figcaption>Cosine Similarity 趨勢（5K / 20K / 50K）</figcaption>
+              <img src="../sideproject/embedding_model_comparison%20(6).png" alt="Cosine similarity line chart">
+              <figcaption>Cosine similarity trend (5K / 20K / 50K)</figcaption>
             </figure>
             <figure class="chart-fig">
-              <img src="sideproject/embedding_model_comparison%20(2).png" alt="50K 建庫時間比較">
-              <figcaption>建庫時間比較（50K 資料）</figcaption>
+              <img src="../sideproject/embedding_model_comparison%20(2).png" alt="Index build time comparison at 50K">
+              <figcaption>Index build time comparison (50K records)</figcaption>
             </figure>
             <figure class="chart-fig">
-              <img src="sideproject/embedding_model_comparison%20(3).png" alt="Query Cosine Similarity 熱圖">
-              <figcaption>四個 Query 的 Cosine Similarity 熱圖（50K）</figcaption>
+              <img src="../sideproject/embedding_model_comparison%20(3).png" alt="Query cosine similarity heatmap">
+              <figcaption>Cosine similarity heatmap across four queries (50K)</figcaption>
             </figure>
           </div>
         </div>
       </div>
 
-      <!-- 系統架構 -->
-      <div class="section-label">系統架構</div>
+      <!-- System architecture -->
+      <div class="section-label">System Architecture</div>
       <div class="flow-grid">
 
-        <!-- 左欄：實驗決策流程 -->
+        <!-- Left column: experiment decision flow -->
         <div class="flow-col">
-          <div class="flow-col-title exp-title">🔬 實驗決策流程</div>
+          <div class="flow-col-title exp-title">🔬 Experiment Decision Flow</div>
 
           <div class="flow-step exp-step">
-            <div class="flow-step-title">資料載入</div>
-            <div class="flow-step-sub">65,000 筆護理記錄（中英文混合）</div>
+            <div class="flow-step-title">Load data</div>
+            <div class="flow-step-sub">65,000 nursing records (mixed Chinese / English)</div>
           </div>
           <div class="flow-arrow">↓</div>
 
           <div class="flow-step exp-step flow-row">
             <div>
-              <div class="flow-step-title">文本長度分析(Chunk Size)</div>
-              <div class="flow-step-sub">平均 167 字｜最長 464 字</div>
+              <div class="flow-step-title">Text length analysis (chunk size)</div>
+              <div class="flow-step-sub">Mean 167 chars | max 464 chars</div>
             </div>
-            <div class="flow-decision">→ 選 200字</div>
+            <div class="flow-decision">&rarr; chose 200 chars</div>
           </div>
           <div class="flow-arrow">↓</div>
 
           <div class="flow-step exp-step flow-row">
             <div>
-              <div class="flow-step-title">規模實驗</div>
+              <div class="flow-step-title">Dataset size experiment</div>
               <div class="flow-step-sub">5K / 20K / 50K</div>
             </div>
-            <div class="flow-decision">→ 選 50K</div>
+            <div class="flow-decision">&rarr; chose 50K</div>
           </div>
           <div class="flow-arrow">↓</div>
 
           <div class="flow-step exp-step flow-row">
             <div>
-              <div class="flow-step-title">Embedding 模型比較</div>
+              <div class="flow-step-title">Embedding model comparison</div>
               <div class="flow-step-sub">MiniLM / BGE-M3 / Text2Vec</div>
             </div>
-            <div class="flow-decision">→ 選 BGE-M3</div>
+            <div class="flow-decision">&rarr; chose BGE-M3</div>
           </div>
           <div class="flow-arrow">↓</div>
 
          
 
           <div class="flow-step exp-step">
-            <div class="flow-step-title">建正式 Vectorstore</div>
+            <div class="flow-step-title">Build production vectorstore</div>
             <div class="flow-step-sub">FAISS + BGE-M3 + 50K + Chunk 200</div>
           </div>
           <div class="flow-arrow">↓</div>
 
           <div class="flow-step exp-step">
-            <div class="flow-step-title">RAGAS 評估集設計</div>
-            <div class="flow-step-sub">30 筆（簡單 / 中等 / 難題 各 10 筆）</div>
+            <div class="flow-step-title">Design RAGAS evaluation set</div>
+            <div class="flow-step-sub">30 items (10 easy / 10 medium / 10 hard)</div>
           </div>
           <div class="flow-arrow">↓</div>
 
           <div class="flow-step exp-step">
-            <div class="flow-step-title">RAGAS 評估結果</div>
-            <div class="flow-step-sub">Faithfulness 0.82｜Context Recall 0.89｜Answer Relevancy 0.44</div>
+            <div class="flow-step-title">RAGAS evaluation results</div>
+            <div class="flow-step-sub">Faithfulness 0.82 &middot; Context Recall 0.89 &middot; Answer Relevancy 0.44</div>
           </div>
           
         </div>
 
-        <!-- 右欄：RAG 系統流程 -->
+        <!-- Right column: RAG runtime flow -->
         <div class="flow-col">
-          <div class="flow-col-title rag-title">🚀 RAG 系統流程</div>
+          <div class="flow-col-title rag-title">🚀 RAG Runtime Flow</div>
 
           <div class="flow-step rag-step">
-            <div class="flow-step-title">使用者輸入問題</div>
-            <div class="flow-step-sub">語意搜尋 或 指定 Source ID</div>
+            <div class="flow-step-title">User asks a question</div>
+            <div class="flow-step-sub">Semantic search or a specific Source ID</div>
           </div>
           <div class="flow-arrow">↓</div>
 
           <div class="flow-step rag-step">
-            <div class="flow-step-title">BGE-M3 向量化</div>
-            <div class="flow-step-sub">問題 → 1024 維向量（GPU 加速）</div>
+            <div class="flow-step-title">BGE-M3 embedding</div>
+            <div class="flow-step-sub">Question &rarr; 1024-dim vector (GPU accelerated)</div>
           </div>
           <div class="flow-arrow">↓</div>
 
           <div class="flow-step rag-step">
-            <div class="flow-step-title">FAISS 向量檢索</div>
-            <div class="flow-step-sub">Top-5 Chunks</div>
+            <div class="flow-step-title">FAISS vector retrieval</div>
+            <div class="flow-step-sub">Top-5 chunks</div>
           </div>
           <div class="flow-arrow">↓</div>
 
           <div class="flow-step rag-step">
-            <div class="flow-step-title">Context 組合</div>
-            <div class="flow-step-sub">5 個 Chunks + Source ID + Similarity 分數</div>
+            <div class="flow-step-title">Assemble context</div>
+            <div class="flow-step-sub">5 chunks + Source ID + similarity score</div>
           </div>
           <div class="flow-arrow">↓</div>
 
           <div class="flow-step rag-step">
-            <div class="flow-step-title">Prompt 設計</div>
-            <div class="flow-step-sub">醫療助理角色 + 拒答機制 + 引用來源</div>
+            <div class="flow-step-title">Prompt design</div>
+            <div class="flow-step-sub">Clinical assistant role + refusal policy + source citation</div>
           </div>
           <div class="flow-arrow">↓</div>
 
           <div class="flow-step rag-step">
-            <div class="flow-step-title">GPT-4.1 生成回答</div>
-            <div class="flow-step-sub">含 [Source: ID] 引用</div>
+            <div class="flow-step-title">GPT-4.1 generates the answer</div>
+            <div class="flow-step-sub">Includes [Source: ID] citations</div>
           </div>
           <div class="flow-arrow">↓</div>
 
 
           <div class="flow-step rag-step">
-            <div class="flow-step-title">RAGAS 評估</div>
-            <div class="flow-step-sub">gpt-4.1-mini Judge｜Faithfulness / Context Recall / Answer Relevancy</div>
+            <div class="flow-step-title">RAGAS evaluation</div>
+            <div class="flow-step-sub">gpt-4.1-mini judge &middot; Faithfulness / Context Recall / Answer Relevancy</div>
           </div>
         </div>
       </div>
 
 
-      <!-- RAGAS 評估 -->
-      <div class="section-label">RAGAS 量化評估結果</div>
+      <!-- RAGAS evaluation -->
+      <div class="section-label">Quantitative Evaluation with RAGAS</div>
       <p class="note" style="margin-bottom:10px;">
-        評估集：30 筆（簡單 / 中等 / 難題各 10 筆），以直接來自原文的資訊作為答案，可驗證。
+        Evaluation set: 30 items (10 easy / 10 medium / 10 hard), with answers drawn directly from the source text so they can be verified.
       </p>
       <table class="data-table">
         <thead>
           <tr>
             <th>Metric</th>
-            <th>分數</th>
-            <th>說明</th>
+            <th>Score</th>
+            <th>Interpretation</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Faithfulness</td>
             <td class="score-high">0.82</td>
-            <td>82% 的回答有 context 依據，幻覺率控制良好</td>
+            <td>82% of answers are grounded in retrieved context; hallucination is well controlled</td>
           </tr>
           <tr>
             <td>Context Recall</td>
             <td class="score-high">0.89</td>
-            <td>89% 的相關資訊被正確撈回</td>
+            <td>89% of the relevant information was retrieved correctly</td>
           </tr>
           <tr>
             <td>Answer Relevancy</td>
             <td class="score-low">0.44</td>
-            <td>偏低，因中英混合術語導致 judge 反推不穩定</td>
+            <td>On the low side: mixed Chinese-English terminology makes the judge's back-inferred question unstable</td>
           </tr>
         </tbody>
       </table>
       <p class="note">
-        按難度分析：簡單和中等題的 Context Recall 達到滿分（1.00），難題下降至 0.67，符合預期。
+        By difficulty: context recall is perfect (1.00) on easy and medium questions and drops to 0.67 on hard ones, which is what I'd expect.
       </p>
       <figure class="chart-fig" style="margin-top:14px;">
-        <img src="sideproject/ragas_evaluation.png" alt="RAGAS 評估結果">
-        <figcaption>RAGAS 評估詳細結果（30 筆測試集，簡單 / 中等 / 難題各 10 筆）</figcaption>
+        <img src="../sideproject/ragas_evaluation.png" alt="RAGAS evaluation results">
+        <figcaption>Detailed RAGAS results (30-item test set: 10 easy / 10 medium / 10 hard)</figcaption>
       </figure>
 
-      <!-- 技術亮點 -->
-      <div class="section-label">技術亮點</div>
+      <!-- Technical highlights -->
+      <div class="section-label">Technical Highlights</div>
 
       <div class="highlight-item">
-        <div class="hi-title">實驗驅動的參數選擇</div>
+        <div class="hi-title">Experiment-Driven Parameter Selection</div>
         <div class="hi-body">
-          資料規模、Embedding 模型、Chunk Size 均有實驗數據支撐，每個決策都可量化解釋。
+          Dataset size, embedding model and chunk size are each backed by experimental data, so every decision can be explained quantitatively.
         </div>
       </div>
 
       <div class="highlight-item">
-        <div class="hi-title">LangChain FAISS Cosine Bug 修正</div>
+        <div class="hi-title">Working Around a LangChain FAISS Cosine Bug</div>
         <div class="hi-body">
-          發現 <code>DistanceStrategy.COSINE</code> 實際回傳 L2 距離的已知問題
-          （GitHub issue #428, #17333），改用 sklearn 手動計算確保正確性。
+          Found the known issue where <code>DistanceStrategy.COSINE</code> actually returns L2 distance
+          (GitHub issues #428, #17333), and switched to computing it manually with sklearn to guarantee correctness.
         </div>
       </div>
 
       <div class="highlight-item">
-        <div class="hi-title">RAGAS 框架量化評估</div>
+        <div class="hi-title">Quantitative Evaluation with the RAGAS Framework</div>
         <div class="hi-body">
-          設計三難度評估集，用 gpt-4.1-mini 當 judge，產出 Faithfulness / Context Recall /
-          Answer Relevancy 三項指標。
+          Built a three-difficulty evaluation set and used gpt-4.1-mini as the judge, producing faithfulness, context recall and
+          answer relevancy scores.
         </div>
       </div>
 
@@ -981,46 +981,46 @@
       <div class="section-label">Demo</div>
 
       <div class="demo-scenario">
-        <div class="demo-scenario-label">語意搜尋</div>
+        <div class="demo-scenario-label">Semantic search</div>
         <div class="demo-q">
-          <span class="demo-badge badge-q">問</span>
-          <span>病人是否有意識不清的情況？</span>
+          <span class="demo-badge badge-q">Q</span>
+          <span>Did the patient show any altered consciousness?</span>
         </div>
         <div class="demo-a">
-          <span class="demo-badge badge-a">答</span>
+          <span class="demo-badge badge-a">A</span>
           <span>
-            根據提供的紀錄，病人有意識不清的情況。<br>
-            [Source: 26185] 家人表示在家發現意識不清，主訴為 conscious disturbance。<br>
-            [Source: 47437] 病人被描述為意識程度改變（GCS 9~13）。
+            Based on the records provided, the patient did show altered consciousness.<br>
+            [Source: 26185] Family reported finding the patient with altered consciousness at home; chief complaint recorded as conscious disturbance.<br>
+            [Source: 47437] Patient described as having an altered level of consciousness (GCS 9&ndash;13).
           </span>
         </div>
       </div>
 
       <div class="demo-scenario">
-        <div class="demo-scenario-label">Source ID 精確查詢</div>
+        <div class="demo-scenario-label">Exact lookup by Source ID</div>
         <div class="demo-q">
-          <span class="demo-badge badge-q">問</span>
-          <span>這位病人有什麼症狀？（source_id=26185）</span>
+          <span class="demo-badge badge-q">Q</span>
+          <span>What symptoms did this patient have? (source_id=26185)</span>
         </div>
         <div class="demo-a">
-          <span class="demo-badge badge-a">答</span>
+          <span class="demo-badge badge-a">A</span>
           <span>
-            病人有意識不清（conscious disturbance）[Source: 26185]。<br>
-            護理紀錄記載家人發現病人意識不清，明確列出無頭暈、無嘔吐、
-            無腹瀉、無發燒、無腹痛、無冒汗。
+            The patient had altered consciousness (conscious disturbance) [Source: 26185].<br>
+            Nursing records note that family found the patient with altered consciousness, and explicitly record no dizziness, no vomiting,
+            no diarrhea, no fever, no abdominal pain and no sweating.
           </span>
         </div>
       </div>
 
       <div class="demo-scenario">
-        <div class="demo-scenario-label">域外問題拒答</div>
+        <div class="demo-scenario-label">Refusing out-of-domain questions</div>
         <div class="demo-q">
-          <span class="demo-badge badge-q">問</span>
-          <span>進擊的巨人米卡莎有跟艾蓮在一起嗎？</span>
+          <span class="demo-badge badge-q">Q</span>
+          <span>Do Mikasa and Eren end up together in Attack on Titan?</span>
         </div>
         <div class="demo-a">
-          <span class="demo-badge badge-a">答</span>
-          <span>根據提供的紀錄，無法找到相關資訊。</span>
+          <span class="demo-badge badge-a">A</span>
+          <span>Based on the records provided, no relevant information could be found.</span>
         </div>
       </div>
       
@@ -1029,24 +1029,24 @@
       <table class="data-table">
         <thead>
           <tr>
-            <th>類別</th>
-            <th>工具</th>
+            <th>Category</th>
+            <th>Tools</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>語言</td><td>Python</td></tr>
-          <tr><td>框架</td><td>LangChain</td></tr>
-          <tr><td>Embedding 模型</td><td>BAAI/bge-m3、MiniLM、Text2Vec（實驗比較）</td></tr>
-          <tr><td>向量資料庫</td><td>FAISS</td></tr>
-          <tr><td>LLM</td><td>GPT-4.1（問答）、GPT-4.1-mini（RAGAS judge）</td></tr>
-          <tr><td>評估框架</td><td>RAGAS</td></tr>
-          <tr><td>開發環境</td><td>Google Colab（T4 GPU）</td></tr>
-          <tr><td>AI協作工具</td><td>Claude</td></tr>
-          <tr><td>其他</td><td>sklearn、HuggingFace、datasets</td></tr>
+          <tr><td>Language</td><td>Python</td></tr>
+          <tr><td>Framework</td><td>LangChain</td></tr>
+          <tr><td>Embedding models</td><td>BAAI/bge-m3, MiniLM, Text2Vec (compared experimentally)</td></tr>
+          <tr><td>Vector database</td><td>FAISS</td></tr>
+          <tr><td>LLM</td><td>GPT-4.1 (Q&amp;A), GPT-4.1-mini (RAGAS judge)</td></tr>
+          <tr><td>Evaluation framework</td><td>RAGAS</td></tr>
+          <tr><td>Environment</td><td>Google Colab (T4 GPU)</td></tr>
+          <tr><td>AI pair-programming</td><td>Claude</td></tr>
+          <tr><td>Other</td><td>sklearn, HuggingFace, datasets</td></tr>
         </tbody>
       </table>
 
-      <p style="margin-top: 18px;"><a href="index.html">返回主頁</a></p>
+      <p style="margin-top: 18px;"><a href="index.html">Back to home</a></p>
     </div>
   </div>
 

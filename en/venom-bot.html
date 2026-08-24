@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -317,7 +317,7 @@
     }
     .win .mark { flex-shrink: 0; }
 
-    /* ── Highlight Cards (功能設計亮點) ── */
+    /* ── Highlight Cards (design highlights) ── */
     .highlight-item {
       border-left: 3px solid var(--accent);
       padding: 8px 14px;
@@ -478,8 +478,8 @@
 </head>
 <body>
   <div class="lang-switch" aria-label="Language">
-    <a href="venom-bot.html" class="active">中文</a>
-    <a href="en/venom-bot.html">EN</a>
+    <a href="../venom-bot.html">中文</a>
+    <a href="venom-bot.html" class="active">EN</a>
   </div>
 
   <div class="menu-wrap" aria-label="Project Navigation">
@@ -491,18 +491,18 @@
       </div>
     </div>
     <nav class="menu-list">
-      <div class="menu-title">專案分頁</div>
-      <a class="menu-link" href="index.html">主頁</a>
-      <a class="menu-link" href="thesis.html">碩論</a>
-      <a class="menu-link" href="capstone.html">專題</a>
-      <a class="menu-link" href="side-project.html">醫療文章RAG檢索(AI RAG)</a>
-      <a class="menu-link" href="https://xin-chi.github.io/ai-news-pipeline/" target="_blank" rel="noopener">每日 AI 快報</a>
+      <div class="menu-title">Pages</div>
+      <a class="menu-link" href="index.html">Home</a>
+      <a class="menu-link" href="thesis.html">Master's Thesis</a>
+      <a class="menu-link" href="capstone.html">Capstone Project</a>
+      <a class="menu-link" href="side-project.html">Medical RAG Retrieval (AI RAG)</a>
+      <a class="menu-link" href="https://xin-chi.github.io/ai-news-pipeline/" target="_blank" rel="noopener">Daily AI Digest</a>
       <a class="menu-link" href="venom-bot.html">Venom-Bot (AI Chatbot)</a>
-      <a class="menu-link" href="personal.html" style="color: #1a3a6b;">課外的我</a>
+      <a class="menu-link" href="personal.html" style="color: #1a3a6b;">Life Outside the Lab</a>
     </nav>
   </div>
 
-  <a class="home-btn" href="index.html" aria-label="返回主頁" title="返回主頁">
+  <a class="home-btn" href="index.html" aria-label="Back to home" title="Back to home">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 3l9 8h-3v10h-4V14H10v7H6V11H3l9-8z"></path>
     </svg>
@@ -511,57 +511,57 @@
   <div class="container">
     <div class="card">
 
-      <h1>Venom-Bot <br> LINE × Gemini <span class="hl">個人 AI 聊天機器人</span></h1>
-      <div class="time-right">Personal Project｜2026.6–2026.7（上線中，給多位朋友實測）</div>
+      <h1>Venom-Bot <br> LINE &times; Gemini <span class="hl">Personal AI Chatbot</span></h1>
+      <div class="time-right">Personal Project | Jun 2026 &ndash; Jul 2026 (live, in daily use by a group of friends)</div>
 
       <div class="takeaway-box">
-        <div class="tk-label">摘要</div>
+        <div class="tk-label">SUMMARY</div>
         <ul>
-          <li>獨立完成<b>端到端開發與維運</b>：架構設計、部署、上線後除錯、多人測試迭代，全程一人負責</li>
-          <li>支援 <b>7 種輸入格式</b>（文字／貼圖／圖片／語音／影片／PDF／連結），共用同一套記憶與防呆邏輯</li>
-          <li>反覆迭代<b>人設 Prompt 設計</b>，並對上線後的 bot 做過 Prompt Injection 資安自測</li>
-          <li>遇到 4 個真實工程挑戰（免費方案休眠、跨平台格式限制不對稱、隱藏 bug、PDF 成本抓錯指標），全部靠<b>實測數據</b>而非猜測解決</li>
+          <li>Delivered <b>end-to-end development and operations</b> solo: architecture, deployment, post-launch debugging and iteration against multi-user testing</li>
+          <li>Handles <b>7 input types</b> (text / stickers / images / audio / video / PDF / links) through one shared memory and input-guard layer</li>
+          <li>Iterated repeatedly on the <b>persona prompt design</b>, then ran prompt-injection security testing against the live bot</li>
+          <li>Hit 4 real engineering problems (free-tier sleep, mismatched platform limits, latent bugs, the wrong cost metric for PDFs) and solved every one with <b>measured data</b> rather than guesswork</li>
         </ul>
       </div>
 
-      <div class="section-label">專案概述</div>
+      <div class="section-label">Project Overview</div>
       <div class="overview-row">
         <div class="overview-text">
           <p>
-            獨立設計並上線一個 <span class="hl">LINE × Gemini</span> 聊天機器人，後端以 <span class="hl">FastAPI</span> 自行開發、部署於 Render。
-            專案涵蓋機密保護、部署、上線後除錯，到多人測試後的穩定性修正，每個設計都以實測數據與真實 bug 驅動，而非紙上規劃。
+            Designed and shipped a <span class="hl">LINE &times; Gemini</span> chatbot, with a <span class="hl">FastAPI</span> backend deployed on Render.
+            The work spans secrets management, deployment, post-launch debugging and the stability fixes that came out of multi-user testing. Every decision was driven by measured data and real bugs, not a plan on paper.
           </p>
           <div class="chip-row" style="margin-top: 10px;">
-            <span class="chip"><span class="dot"></span>文字</span>
-            <span class="chip"><span class="dot"></span>貼圖</span>
-            <span class="chip"><span class="dot"></span>圖片</span>
-            <span class="chip"><span class="dot"></span>語音</span>
-            <span class="chip"><span class="dot"></span>影片</span>
+            <span class="chip"><span class="dot"></span>Text</span>
+            <span class="chip"><span class="dot"></span>Stickers</span>
+            <span class="chip"><span class="dot"></span>Images</span>
+            <span class="chip"><span class="dot"></span>Audio</span>
+            <span class="chip"><span class="dot"></span>Video</span>
             <span class="chip"><span class="dot"></span>PDF</span>
-            <span class="chip"><span class="dot"></span>連結</span>
+            <span class="chip"><span class="dot"></span>Links</span>
           </div>
         </div>
         <figure class="overview-photo">
-          <img src="venombot/bot-profile.jpg" alt="LINE 官方帳號主頁">
-          <figcaption>LINE 官方帳號主頁</figcaption>
+          <img src="../venombot/bot-profile.jpg" alt="LINE official account page">
+          <figcaption>LINE official account page</figcaption>
         </figure>
       </div>
 
-      <div class="section-label">系統架構</div>
+      <div class="section-label">System Architecture</div>
       <figure class="diagram-figure">
-        <svg viewBox="0 0 880 300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif" role="img" aria-label="系統資料流：使用者透過 LINE 傳送訊息，Render 上自建的 FastAPI 後端接收 webhook 後呼叫 Gemini API 產生回覆與可選表情包，再原路徑送回使用者；背景另有 GitHub push 觸發自動部署、UptimeRobot 每 5 分鐘保活、Render 提供表情包靜態檔案服務。">
+        <svg viewBox="0 0 880 300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif" role="img" aria-label="System data flow: a user sends a message through LINE; the FastAPI backend on Render receives the webhook, calls the Gemini API to produce a reply and an optional meme, and returns it along the same path. In the background, a GitHub push triggers auto-deploy, UptimeRobot pings every 5 minutes to keep the service awake, and Render serves the meme static files.">
           <defs>
             <marker id="vb-arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
               <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
             </marker>
           </defs>
 
-          <text x="197" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">傳送訊息</text>
-          <text x="197" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">多種訊息類型</text>
-          <text x="422" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">webhook 進線</text>
-          <text x="422" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">驗證身份</text>
-          <text x="672" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">呼叫 Gemini</text>
-          <text x="672" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">多模態理解</text>
+          <text x="197" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">Send message</text>
+          <text x="197" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Multiple message types</text>
+          <text x="422" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">Webhook in</text>
+          <text x="422" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Verify signature</text>
+          <text x="672" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">Call Gemini</text>
+          <text x="672" y="40" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Multimodal understanding</text>
 
           <line x1="160" y1="80" x2="230" y2="80" stroke="currentColor" stroke-width="1.6" marker-end="url(#vb-arrow)"></line>
           <line x1="385" y1="80" x2="455" y2="80" stroke="currentColor" stroke-width="1.6" marker-end="url(#vb-arrow)"></line>
@@ -571,20 +571,20 @@
           <line x1="455" y1="104" x2="385" y2="104" stroke="currentColor" stroke-width="1.3" opacity="0.7" marker-end="url(#vb-arrow)"></line>
           <line x1="700" y1="104" x2="640" y2="104" stroke="currentColor" stroke-width="1.3" opacity="0.7" marker-end="url(#vb-arrow)"></line>
 
-          <text x="197" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">回覆訊息</text>
-          <text x="422" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">送出回覆</text>
-          <text x="672" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">回覆 ＋ 表情包</text>
+          <text x="197" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Reply message</text>
+          <text x="422" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Send reply</text>
+          <text x="672" y="140" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Reply + meme</text>
 
           <rect x="10" y="60" width="150" height="60" rx="8" fill="var(--card-solid)" stroke="currentColor" stroke-width="1.4"></rect>
-          <text x="85" y="87" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">使用者</text>
-          <text x="85" y="103" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">本人＋5位朋友</text>
+          <text x="85" y="87" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">User</text>
+          <text x="85" y="103" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.75">Me + 5 friends</text>
 
           <rect x="235" y="60" width="150" height="60" rx="8" fill="var(--card-solid)" stroke="currentColor" stroke-width="1.4"></rect>
-          <text x="310" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">LINE 平台</text>
+          <text x="310" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">LINE platform</text>
 
           <rect x="460" y="60" width="180" height="60" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.4"></rect>
           <text x="550" y="87" text-anchor="middle" font-size="14" font-weight="800" fill="#fdf5e8">Render</text>
-          <text x="550" y="103" text-anchor="middle" font-size="10" fill="#fdf5e8" opacity="0.92">FastAPI・自建後端</text>
+          <text x="550" y="103" text-anchor="middle" font-size="10" fill="#fdf5e8" opacity="0.92">FastAPI backend</text>
 
           <rect x="705" y="60" width="165" height="60" rx="8" fill="var(--card-solid)" stroke="currentColor" stroke-width="1.4"></rect>
           <text x="787" y="87" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Gemini API</text>
@@ -599,119 +599,119 @@
 
           <rect x="665" y="210" width="150" height="56" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.85"></rect>
           <text x="740" y="235" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.85">/memes/*.png</text>
-          <text x="740" y="250" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">表情包</text>
+          <text x="740" y="250" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">Memes</text>
 
           <line x1="380" y1="210" x2="505" y2="121" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6" marker-end="url(#vb-arrow)"></line>
-          <text x="330" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">每 5 分鐘保活</text>
+          <text x="330" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">Keep-alive / 5 min</text>
 
           <line x1="560" y1="210" x2="560" y2="121" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6" marker-end="url(#vb-arrow)"></line>
-          <text x="595" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">push 觸發部署</text>
+          <text x="595" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">Push triggers deploy</text>
 
           <line x1="615" y1="121" x2="725" y2="209" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6" marker-end="url(#vb-arrow)"></line>
-          <text x="700" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">靜態檔案服務</text>
+          <text x="700" y="178" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.7">Static file serving</text>
         </svg>
-        <figcaption class="note">圖 1 — 系統資料流。中央<b>Render／FastAPI</b>是全部自行開發的後端；（LINE、Gemini、GitHub、UptimeRobot）為串接的外部服務。</figcaption>
+        <figcaption class="note">Fig 1 &mdash; System data flow. The <b>Render / FastAPI</b> block at the center is the backend I built; LINE, Gemini, GitHub and UptimeRobot are external services it integrates with.</figcaption>
       </figure>
 
-      <div class="section-label">輸入限制與防呆設計</div>
-      <p class="note">每種訊息類型都有各自的把關規則，全部在呼叫 Gemini 之前擋下，避免浪費額度。</p>
+      <div class="section-label">Input Limits and Guard Rails</div>
+      <p class="note">Every message type has its own gate, and all of them reject before Gemini is ever called, so nothing burns quota needlessly.</p>
       <div class="table-wrap">
         <table class="data-table">
-          <thead><tr><th>類型</th><th>上限</th><th>判斷方式</th></tr></thead>
+          <thead><tr><th>Type</th><th>Limit</th><th>How it is checked</th></tr></thead>
           <tbody>
-            <tr><td>文字</td><td class="score-high">500 字</td><td>超過直接罐頭回覆，不呼叫 Gemini</td></tr>
-            <tr><td>語音</td><td class="score-high">2 分 01 秒</td><td>讀 LINE 訊息自帶的 duration 欄位，免下載即可判斷</td></tr>
-            <tr><td>影片</td><td class="score-high">31 秒</td><td>同上；通過上限的影片一律用低畫質模式送出，省 token</td></tr>
-            <tr><td>PDF</td><td class="score-high">6 頁</td><td>先以 20MB 做粗篩，通過後下載、用 <code>pypdf</code> 實際數頁數</td></tr>
-            <tr><td>其他檔案格式</td><td>不支援</td><td>非 PDF 直接罐頭回覆，不下載</td></tr>
+            <tr><td>Text</td><td class="score-high">500 characters</td><td>Over the limit gets a canned reply; Gemini is never called</td></tr>
+            <tr><td>Audio</td><td class="score-high">2 min 01 sec</td><td>Reads the <code>duration</code> field LINE already sends &mdash; no download needed to decide</td></tr>
+            <tr><td>Video</td><td class="score-high">31 sec</td><td>Same as above; anything that passes is sent at low media resolution to save tokens</td></tr>
+            <tr><td>PDF</td><td class="score-high">6 pages</td><td>A 20MB size check first, then download and count the actual pages with <code>pypdf</code></td></tr>
+            <tr><td>Other file types</td><td>Not supported</td><td>Non-PDF files get a canned reply and are never downloaded</td></tr>
           </tbody>
         </table>
       </div>
 
-      <div class="section-label">除錯歷程</div>
+      <div class="section-label">Debugging Log</div>
 
       <div class="exp-block">
-        <div class="exp-header"><span class="exp-num">①</span>免費方案的「休眠」問題，得自己接外部服務解決</div>
+        <div class="exp-header"><span class="exp-num">①</span>The free tier sleeps &mdash; and the fix had to be external</div>
         <div class="exp-body">
-          Render 免費方案閒置 15 分鐘會自動休眠，冷啟動需約 60 秒——比 LINE 本身的回應時限還長，
-          使用者第一次傳訊息很可能完全等不到回覆，體驗上很像「機器人壞了」。解法是要有人定期從外部打進來保持清醒，但同樣得在免費額度內做到。
-          原本想用 GitHub Actions 排程，查了才發現每次執行最少算 1 分鐘，5–10 分鐘頻率一個月會燒掉約 4,320 分鐘，遠超 2,000 分鐘的免費額度，大約 14 天就會用罄。
+          Render's free tier sleeps after 15 idle minutes, and a cold start takes roughly 60 seconds &mdash; longer than LINE's own reply window.
+          A first-time message may well get no reply at all, which reads to the user as &ldquo;the bot is broken.&rdquo; The fix is something outside pinging it regularly to keep it awake, and that too had to stay inside a free tier.
+          GitHub Actions was the first idea, until I checked the billing: every run counts as at least one minute, so pinging every 5&ndash;10 minutes burns about 4,320 minutes a month against a 2,000-minute free allowance, exhausted in roughly 14 days.
         </div>
-        <div class="win"><span class="mark">✓</span><span>改用 UptimeRobot，免費方案每 5 分鐘 ping 一次，額度用不完，完全不用人工介入確認，實現 0 成本</span></div>
-      </div>
-
-      <div class="exp-block">
-        <div class="exp-header"><span class="exp-num">②</span>朋友多人測試揪出的兩個隱藏 bug</div>
-        <div class="exp-body">
-          一次朋友連續傳 30 張圖片，才發現訊息處理失敗時沒有妥善的容錯機制，會拖累整批訊息都收不到回覆。
-          同時也發現「呼叫太頻繁被 Gemini 暫時拒絕」的重試邏輯寫成<b>全體共用</b>，一人狂傳會連帶讓完全沒亂傳的其他人也已讀不回。
-        </div>
-        <div class="win"><span class="mark">✓</span><span>補上容錯機制讓單則失敗不影響其他訊息，並把限流狀態改成以每個使用者獨立計算。兩個問題都是靠朋友實測才浮現，不是事前能猜到的</span></div>
+        <div class="win"><span class="mark">✓</span><span>Switched to UptimeRobot: a free-tier ping every 5 minutes, well inside its allowance, no manual intervention, zero cost</span></div>
       </div>
 
       <div class="exp-block">
-        <div class="exp-header"><span class="exp-num">③</span>多模態輸入的「能傳」跟「能處理」常常對不上</div>
+        <div class="exp-header"><span class="exp-num">②</span>Two latent bugs that only multi-user testing could surface</div>
         <div class="exp-body">
-          LINE 允許使用者傳到 200MB 的檔案，但 Gemini 語音只吃 20MB、影片只吃 100MB，兩邊限制完全不對稱，得自己另外加一層防呆。
-          而且該用哪個指標（檔案大小／時長／頁數）才抓得住真正的成本，每種媒體類型還不一樣，得個別驗證才知道。
+          A friend sent 30 images back to back, which exposed that a single failed message had no proper fault tolerance around it: one failure dragged the whole batch down and nothing got a reply.
+          The same session revealed that the back-off logic for &ldquo;calling Gemini too often&rdquo; was written as <b>global shared state</b>, so one person spamming left everyone else on read.
         </div>
-        <div class="win"><span class="mark">✓</span><span>語音、影片改用 LINE 訊息自帶的<span class="hl">時長</span>判斷，三種媒體、三套各自驗證過的防呆標準</span></div>
+        <div class="win"><span class="mark">✓</span><span>Added fault tolerance so one failure can't affect other messages, and moved rate-limit state to per-user tracking. Neither bug was predictable in advance; only real users surfaced them</span></div>
       </div>
 
       <div class="exp-block">
-        <div class="exp-header"><span class="exp-num">④</span>PDF 用「檔案大小」限制成本，其實抓錯了指標</div>
+        <div class="exp-header"><span class="exp-num">③</span>What the platform accepts &ne; what the model can process</div>
         <div class="exp-body">
-          一開始以為檔案大小能有效限制 token 成本，實測後發現：一份僅 0.28MB、300 頁的純文字 PDF，要吃掉 160,168 tokens，單次就用掉每分鐘額度的 64%。
-          檔案大小跟頁數完全不成比例。
+          LINE lets users upload files up to 200MB, but Gemini accepts only 20MB of audio and 100MB of video. The two limits are completely asymmetric, so the gap had to be closed with my own guard layer.
+          And which metric actually tracks cost &mdash; file size, duration or page count &mdash; differs by media type, so each one had to be verified separately.
         </div>
-        <div class="win"><span class="mark">✓</span><span>查明後發現Gemini處理pdf檔案是用頁數固定258 token計算。改用以 pypdf 實際算頁數把關（6 頁上限），才是真正抓得住成本的指標</span></div>
+        <div class="win"><span class="mark">✓</span><span>Audio and video are now gated on the <span class="hl">duration</span> LINE already provides &mdash; three media types, three independently validated thresholds</span></div>
+      </div>
+
+      <div class="exp-block">
+        <div class="exp-header"><span class="exp-num">④</span>Capping PDFs by file size was measuring the wrong thing</div>
+        <div class="exp-body">
+          I assumed file size would bound token cost. Testing said otherwise: a plain-text PDF of just 0.28MB and 300 pages consumed 160,168 tokens &mdash; 64% of the per-minute budget in a single request.
+          File size and page count are simply not proportional.
+        </div>
+        <div class="win"><span class="mark">✓</span><span>Digging in showed Gemini bills PDFs at a flat 258 tokens per page. Gating on the actual page count via pypdf (6-page cap) is the metric that actually tracks cost</span></div>
       </div>
 
       <div class="highlight-item">
-        <div class="hi-title">這四個挑戰的共通點</div>
-        <div class="hi-body">光讀文件或憑直覺猜不到答案，得靠真實資料實測，甚至嚴謹的比較才找得到真相，而且結果常與一開始的假設完全相反。</div>
+        <div class="hi-title">What These Four Problems Had in Common</div>
+        <div class="hi-body">None of them could be answered by reading documentation or trusting intuition. Each needed measurement, sometimes a careful controlled comparison, and the answer often contradicted my starting assumption outright.</div>
       </div>
 
-      <div class="section-label">功能設計亮點</div>
+      <div class="section-label">Design Highlights</div>
 
       <div class="highlight-item">
-        <div class="hi-title">結構化輸出一次呼叫完成回覆＋表情包判斷</div>
-        <div class="hi-body">用結構化輸出讓 Gemini 在同一次呼叫裡同時產生回覆文字與可選的表情包 ID，不需額外請求；<span class="hl">表情包</span>依Gemini判斷後設計即使情境符合,也只有 25% 機率真的附圖,增加訊息傳送的變化性。</div>
+        <div class="hi-title">Structured Output: Reply and Meme Choice in a Single Call</div>
+        <div class="hi-body">Structured output lets Gemini return both the reply text and an optional meme ID in the same call, with no second request. Even when Gemini judges a <span class="hl">meme</span> to fit the moment, it is only attached 25% of the time &mdash; deliberately, so replies stay varied rather than predictable.</div>
       </div>
       <div class="highlight-item">
-        <div class="hi-title">人設語氣的迭代設計（Prompt Engineering）</div>
-        <div class="hi-body">初版人設「有點嗆」被朋友反饋太衝，兩輪調整成「禮貌有理、偶爾吐槽」；另外加上「提到作者要恭敬」的規則，上線後又發現模型會自己主動搬出作者當話題，再追加「不能主動提起」修正。每次調整都要重新測過<span class="hl">說話模式、故意找碴、提到作者</span>等情境，確認新語氣沒有意外副作用。</div>
+        <div class="hi-title">Iterating on Persona and Tone (Prompt Engineering)</div>
+        <div class="hi-body">The first persona was &ldquo;a bit sharp,&rdquo; and friends said it came across as aggressive; two rounds of tuning landed on &ldquo;polite by default, occasionally sarcastic.&rdquo; I added a rule to stay respectful when the author is mentioned, then found the model bringing the author up unprompted as a joke, which needed a further &ldquo;never raise it yourself&rdquo; correction. Every adjustment meant re-testing <span class="hl">normal conversation, deliberate provocation, and author mentions</span> to confirm the new tone had no unintended side effects.</div>
       </div>
       <div class="highlight-item">
-        <div class="hi-title">Prompt Injection 自我測試</div>
-        <div class="hi-body">對已上線 bot 實測多種常見手法（洩漏系統設定、指令覆蓋、突破字數限制、誘導亂編答案、角色扮演越獄），<span class="hl">全數擋下</span>；有被使用者逼迫透漏的內容也純屬虛構，非實際方法與技術。</div>
+        <div class="hi-title">Prompt Injection Self-Testing</div>
+        <div class="hi-body">Tested the live bot against the common techniques &mdash; leaking the system prompt, instruction override, breaking the length cap, baiting fabricated answers, and role-play jailbreaks. <span class="hl">All were blocked</span>; anything a user did manage to pressure out of it was invented, not the actual configuration or method.</div>
       </div>
 
-      <div class="section-label">成本與額度盤點</div>
-      <p class="note">全部服務停留在免費方案。</p>
+      <div class="section-label">Cost and Quota Breakdown</div>
+      <p class="note">Every service stays on its free tier.</p>
       <div class="table-wrap">
         <table class="data-table">
-          <thead><tr><th>項目</th><th>數字</th><th>備註</th></tr></thead>
+          <thead><tr><th>Item</th><th>Figure</th><th>Notes</th></tr></thead>
           <tbody>
-            <tr><td>Gemini RPM / TPM / RPD</td><td>15 / 250,000 / 500</td><td>選擇Gemini API理由：時間段中額度沒有超標，就可以達到長期免費</td></tr>
-            <tr><td>文字對話（12 輪記憶）</td><td class="score-high">約 267 tokens／次</td><td>遠低於每分鐘上限</td></tr>
+            <tr><td>Gemini RPM / TPM / RPD</td><td>15 / 250,000 / 500</td><td>Why Gemini: as long as usage stays under quota within each window, it runs free indefinitely</td></tr>
+            <tr><td>Text conversation (12-turn memory)</td><td class="score-high">~267 tokens / message</td><td>Far below the per-minute ceiling</td></tr>
           </tbody>
         </table>
       </div>
 
-      <div class="section-label">實際畫面</div>
+      <div class="section-label">Screenshots</div>
       <div class="fig-grid">
         <figure class="chart-fig">
-          <img src="venombot/input-demo.jpg" alt="多種輸入格式同時運作">
-          <figcaption>貼圖回覆、圖片影片理解、語音辨識、文字問答、...</figcaption>
+          <img src="../venombot/input-demo.jpg" alt="Multiple input formats working together">
+          <figcaption>Sticker replies, image and video understanding, speech recognition, text Q&amp;A, and more</figcaption>
         </figure>
         <figure class="chart-fig">
-          <img src="venombot/prompt-injection.jpg" alt="Prompt Injection 自我測試">
-          <figcaption>越獄指令、角色扮演、假造系統指令注入 API key，全數擋下</figcaption>
+          <img src="../venombot/prompt-injection.jpg" alt="Prompt injection self-testing">
+          <figcaption>Jailbreak commands, role-play, and forged system instructions injecting an API key &mdash; all blocked</figcaption>
         </figure>
         <figure class="chart-fig">
-          <img src="venombot/limit-defense.jpg" alt="超過上限的防呆機制">
-          <figcaption>過長 PDF、影片、語音都被擋在呼叫 Gemini 之前</figcaption>
+          <img src="../venombot/limit-defense.jpg" alt="Guard rails for over-limit input">
+          <figcaption>Oversized PDFs, video and audio are all stopped before Gemini is called</figcaption>
         </figure>
       </div>
 
@@ -719,7 +719,7 @@
       <div class="tag-row">
         <span class="tag">Python</span>
         <span class="tag">FastAPI</span>
-        <span class="tag">Gemini API（google-genai SDK）</span>
+        <span class="tag">Gemini API (google-genai SDK)</span>
         <span class="tag">LINE Messaging API</span>
         <span class="tag">Render</span>
         <span class="tag">UptimeRobot</span>
@@ -727,7 +727,7 @@
         <span class="tag">Structured Output (response_schema)</span>
       </div>
 
-      <p style="margin-top: 18px;"><a href="index.html">返回主頁</a></p>
+      <p style="margin-top: 18px;"><a href="index.html">Back to home</a></p>
     </div>
   </div>
 
